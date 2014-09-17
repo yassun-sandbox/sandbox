@@ -6,6 +6,21 @@ describe "Static pages" do
   # 以降は should の対象は暗黙的に「page」になる。
   subject { page }
 
+  it "should have the right links on the layout" do
+    visit root_path
+    click_link "About"
+    should have_title(full_title('About Us'))
+    click_link "Help"
+    should have_title(full_title('Help'))
+    click_link "Contact"
+    should have_title(full_title('Contact'))
+    click_link "Home"
+    click_link "Sign up now!"
+    should have_title(full_title('Sign up'))
+    click_link "sample app"
+    should have_title(full_title(''))
+  end
+
   shared_examples_for "all static pages" do
     it { should have_content(heading) }
     it { should have_title(full_title(page_title)) }
