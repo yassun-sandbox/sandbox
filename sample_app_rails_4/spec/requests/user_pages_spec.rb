@@ -32,8 +32,10 @@ describe "User pages" do
 
     end
 
+    # ログイン成功処理
     describe "with valid information" do
 
+      # フォームへの入力
       before do
         fill_in "Name",         with: "Example User"
         fill_in "Email",        with: "user@example.com"
@@ -49,6 +51,7 @@ describe "User pages" do
         before { click_button submit }
         let(:user) { User.find_by(email: 'user@example.com') }
 
+        it { should have_link('Sign out') }
         it { should have_title(user.name) }
         it { should have_selector('div.alert.alert-success', text: 'Welcome') }
       end
