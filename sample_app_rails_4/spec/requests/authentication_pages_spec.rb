@@ -20,9 +20,14 @@ describe "Authentication" do
 
       # ページ遷移してない
       it { should have_title('Sign in') }
-
       # エラーメッセージが出ているか
       it { should have_selector('div.alert.alert-error', text: 'Invalid') }
+
+      # ページを離れた際にエラーがでているか
+      describe "after visiting another page" do
+        before { click_link "Home" }
+        it { should_not have_selector('div.alert.alert-error') }
+      end
 
     end
 
