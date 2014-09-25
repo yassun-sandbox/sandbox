@@ -113,5 +113,13 @@ describe User do
     end
   end
 
+  # 自動ログインのテスト
+  describe "remember token" do
+    before { @user.save }
+
+    # ユーザーの更新処理を行った場合に自動ログイン用カラムが設定されるか
+    its(:remember_token) { should_not be_blank }
+  end
+
 end
 
