@@ -49,6 +49,13 @@ describe "Authentication" do
 
       # サインインのリンクが無くなっている事
       it { should_not have_link('Sign in', href: signin_path) }
+
+      # サインアウトの確認
+      describe "followed by signout" do
+        before { click_link "Sign out" }
+        it { should have_link('Sign in') }
+      end
+
     end
 
   end
