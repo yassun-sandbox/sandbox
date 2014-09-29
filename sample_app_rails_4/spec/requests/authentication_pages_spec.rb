@@ -36,17 +36,15 @@ describe "Authentication" do
 
       # テストデータの作成
       let(:user) { FactoryGirl.create(:user) }
-      before do
-        fill_in "Email",    with: user.email.upcase
-        fill_in "Password", with: user.password
-        click_button "Sign in"
-      end
+      before { sign_in user }
 
       # サインイン後のページが表示されている事
       it { should have_title(user.name) }
-      it { should have_link('Profile',  href: user_path(user)) }
-      it { should have_link('Settings', href: edit_user_path(user)) }
-      it { should have_link('Sign out', href: signout_path) }
+      it { should have_link('Users',       href: users_path) }
+      it { should have_link('Profile',     href: user_path(user)) }
+      it { should have_link('Settings',    href: edit_user_path(user)) }
+      it { should have_link('Sign out',    href: signout_path) }
+      it { should_not have_link('Sign in', href: signin_path) } 
 
       # サインインのリンクが無くなっている事
       it { should_not have_link('Sign in', href: signin_path) }
