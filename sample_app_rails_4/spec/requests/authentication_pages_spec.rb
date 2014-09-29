@@ -44,7 +44,8 @@ describe "Authentication" do
 
       # サインイン後のページが表示されている事
       it { should have_title(user.name) }
-      it { should have_link('Profile', href: user_path(user)) }
+      it { should have_link('Profile',  href: user_path(user)) }
+      it { should have_link('Settings', href: edit_user_path(user)) }
       it { should have_link('Sign out', href: signout_path) }
 
       # サインインのリンクが無くなっている事
