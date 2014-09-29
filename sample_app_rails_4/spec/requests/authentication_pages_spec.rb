@@ -59,6 +59,27 @@ describe "Authentication" do
 
     end
 
+    describe "authorization" do
+
+        describe "for non-signed-in users" do
+          let(:user) { FactoryGirl.create(:user) }
+
+          describe "in the Users controller" do
+
+            # ログインしていない場合にedit pageを訪れた場合、ログイン画面が表示されるか？
+            describe "visiting the edit page" do
+              before { visit edit_user_path(user) }
+              it { should have_title('Sign in') }
+            end
+
+            # ログインしていない場合にUpdate要求を行った場合、ログイン画面のリダイレクトが返されるか。
+            describe "submitting to the update action" do
+              before { patch user_path(user) }
+              specify { expect(response).to redirect_to(signin_path) }
+            end
+          end
+        end
+    end
   end
 end
 
