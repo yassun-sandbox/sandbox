@@ -7,6 +7,15 @@ module SampleBlog
 
     enable :sessions
 
+    # Add these routes below to the app file...
+    get "/" do
+      "Hello World!"
+    end
+
+    get :about, :map => '/about_us' do
+      render :haml, "%p This is a sample blog created to demonstrate the power of Padrino!"
+    end
+
     ##
     # Caching support.
     #
