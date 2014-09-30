@@ -15,11 +15,24 @@ describe "User pages" do
     it { should have_title('All users') }
     it { should have_content('All users') }
 
-    it "should list each user" do
-      User.all.each do |user|
-        expect(page).to have_selector('li', text: user.name)
+
+    describe "pagination" do
+
+      # テスト実施前に30人のテストデータを作成する。
+      before(:all) { 30.times { FactoryGirl.create(:user) } }
+
+      # テスト終了前にテストデータを削除
+      after(:all)  { User.delete_all }
+
+      it { should have_selector('div.pagination') }
+
+      it "should list each user" do
+        User.paginate(page: 1).each do |user|
+          expect(page).to have_selector('li', text: user.name)
+        end
       end
     end
+
   end
 
   describe "profile page" do
