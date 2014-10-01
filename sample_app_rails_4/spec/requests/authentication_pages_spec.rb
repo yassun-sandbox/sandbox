@@ -99,7 +99,6 @@ describe "Authentication" do
           end
         end
 
-
         describe "as wrong user" do
           let(:user) { FactoryGirl.create(:user) }
           let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com") }
@@ -117,7 +116,6 @@ describe "Authentication" do
           end
         end
 
-
         describe "as non-admin user" do
           let(:user) { FactoryGirl.create(:user) }
           let(:non_admin) { FactoryGirl.create(:user) }
@@ -129,13 +127,7 @@ describe "Authentication" do
             specify { expect(response).to redirect_to(root_path) }
           end
         end
-
-
-
     end
-
-
-
   end
 end
 
