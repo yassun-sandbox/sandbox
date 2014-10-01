@@ -33,6 +33,35 @@ describe "User pages" do
       end
     end
 
+    # 削除リンク
+    describe "delete links" do
+
+      # 通常ユーザーの場合に削除リンクが存在しない事の確認
+      it { should_not have_link('delete') }
+
+      # 管理者の場合
+      describe "as an admin user" do
+
+        # 管理者のデータを取得
+        let(:admin) { FactoryGirl.create(:admin) }
+        before do
+          sign_in admin
+          visit users_path
+        end
+
+        # リンクを持ってるか？
+        it { should have_link('delete', href: user_path(User.first)) }
+        it "should be able to delete another user" do
+          expect do
+            click_link('delete', match: :first)
+          end.to change(User, :count).by(-1)
+        end
+
+        it { should_not have_link('delete', href: user_path(admin)) }
+      end
+
+    end
+
   end
 
   describe "profile page" do
