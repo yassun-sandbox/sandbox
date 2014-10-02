@@ -136,9 +136,10 @@ describe User do
     its(:remember_token) { should_not be_blank }
   end
 
-  # 新しいポストが最初にくる事の確認
+  # micropost関係
   describe "micropost associations" do
 
+    # 新しいポストが最初にくる事の確認
     before { @user.save }
     let!(:older_micropost) do
       FactoryGirl.create(:micropost, user: @user, created_at: 1.day.ago)
@@ -151,6 +152,17 @@ describe User do
     it "should have the right microposts in the right order" do
       expect(@user.microposts.to_a).to eq [newer_micropost, older_micropost]
     end
+
+    # userを削除した場合にmicropostも削除される事の確認
+    it "should destroy associated microposts" do
+      microposts = @user.microposts.to_a
+      @user.destroy
+      expect(microposts).not_to be_empty
+      microposts.each do |micropost|
+        expect(Micropost.where(id: micropost.id)).to be_empty
+      end
+    end
+
   end
 
 end
