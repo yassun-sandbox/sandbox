@@ -18,10 +18,21 @@ describe Micropost do
   # バリデーション
   it { should be_valid }
 
+  # 異常系
   describe "when user_id is not present" do
-
     # ユーザーIDがnullは許可しない
     before { @micropost.user_id = nil }
+    it { should_not be_valid }
+  end
+  describe "with blank content" do
+    # コンテンツに空白は許可しない
+    before { @micropost.content = " " }
+    it { should_not be_valid }
+  end
+
+  # 140文字以上は許可しない
+  describe "with content that is too long" do
+    before { @micropost.content = "a" * 141 }
     it { should_not be_valid }
   end
 
