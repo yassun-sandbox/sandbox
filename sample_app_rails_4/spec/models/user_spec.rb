@@ -19,6 +19,8 @@ describe User do
   it { should respond_to(:authenticate) }
   it { should respond_to(:admin) }
 
+  # micropostが関連付けされてるか
+  it { should respond_to(:microposts) }
   it { should be_valid }
   it { should_not be_admin }
  
