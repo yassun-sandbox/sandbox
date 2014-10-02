@@ -1,5 +1,14 @@
 require 'spec_helper'
 
 describe Micropost do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:user) { FactoryGirl.create(:user) }
+  before do
+    # このコードは慣用的な意味で正しくない。
+    @micropost = Micropost.new(content: "Lorem ipsum", user_id: user.id)
+  end
+
+  subject { @micropost }
+
+  it { should respond_to(:content) }
+  it { should respond_to(:user_id) }
 end
