@@ -10,4 +10,16 @@ describe Relationship do
   subject { relationship }
 
   it { should be_valid }
+
+  describe "follower methods" do
+
+    # respond_to = メソッドを呼び出しできるかどうか
+    it { should respond_to(:follower) }
+    it { should respond_to(:followed) }
+
+    # its = subjectで指定しているrelationship
+    its(:follower) { should eq follower }
+    its(:followed) { should eq followed }
+  end
+
 end
