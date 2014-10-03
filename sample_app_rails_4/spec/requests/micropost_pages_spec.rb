@@ -69,6 +69,27 @@ describe "Micropost pages" do
       end
     end
 
+    describe "pagination" do
+      # テスト実施前に50件のテストデータを作成する。
+      before do
+        50.times { FactoryGirl.create(:micropost, user: user) }
+        visit root_path 
+      end
+
+      # テスト終了前にテストデータを削除
+      after(:all)  { Micropost.delete_all }
+
+      it { should have_selector('div.pagination') }
+
+      it "should list each user" do
+        Micropost.paginate(page: 1).each do |micropost|
+          expect(page).to have_selector('li', text: micropost.content)
+        end
+      end
+    end
+
+
+
   end
 end
 
