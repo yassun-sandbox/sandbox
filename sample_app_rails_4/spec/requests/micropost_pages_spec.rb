@@ -88,6 +88,15 @@ describe "Micropost pages" do
       end
     end
 
+    # 他のユーザーの投稿が消せない事を確認
+    describe "other user's micropost without delete_link" do
+      let(:other_user) { FactoryGirl.create(:user) }
+      before do
+        FactoryGirl.create(:micropost, user: other_user)
+        visit user_path(other_user)
+      end
+      it { should_not have_link('delete') }
+    end
 
 
   end
