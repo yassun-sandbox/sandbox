@@ -11,8 +11,8 @@ describe Relationship do
 
   it { should be_valid }
 
+  # メソッドが呼び出し可能かの確認
   describe "follower methods" do
-
     # respond_to = メソッドを呼び出しできるかどうか
     it { should respond_to(:follower) }
     it { should respond_to(:followed) }
@@ -20,6 +20,18 @@ describe Relationship do
     # its = subjectで指定しているrelationship
     its(:follower) { should eq follower }
     its(:followed) { should eq followed }
+  end
+
+  # null値が取れないことの確認
+  describe "when followed id is not present" do
+    before { relationship.followed_id = nil }
+    it { should_not be_valid }
+  end
+
+  # null値が取れないことの確認
+  describe "when follower id is not present" do
+    before { relationship.follower_id = nil }
+    it { should_not be_valid }
   end
 
 end
