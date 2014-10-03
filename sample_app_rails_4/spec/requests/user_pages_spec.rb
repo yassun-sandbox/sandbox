@@ -79,6 +79,66 @@ describe "User pages" do
       it { should have_content(user.microposts.count) }
     end
 
+    # フォロー登録/解除ボタン
+    describe "follow/unfollow buttons" do
+      let(:other_user) { FactoryGirl.create(:user) }
+      before { sign_in user }
+
+      # フォロー登録
+      describe "following a user" do
+
+        # other userのページに行く
+        before { visit user_path(other_user) }
+
+        # フォローすると１件カウントが増える確認
+        it "should increment the followed user count" do
+          expect do
+            click_button "Follow"
+          end.to change(user.followed_users, :count).by(1)
+        end
+
+        it "should increment the other user's followers count" do
+          expect do
+            click_button "Follow"
+          end.to change(other_user.followers, :count).by(1)
+        end
+
+        # ボタンの表示が変わっていること
+        describe "toggling the button" do
+          before { click_button "Follow" }
+          it { should have_xpath("//input[@value='Unfollow']") }
+        end
+      end
+
+      # フォロー解除
+      describe "unfollowing a user" do
+
+        # フォローしてるユーザのページに飛ぶ
+        before do
+          user.follow!(other_user)
+          visit user_path(other_user)
+        end
+
+        # フォロー解除したら１件減る事を確認する
+        it "should decrement the followed user count" do
+          expect do
+            click_button "Unfollow"
+          end.to change(user.followed_users, :count).by(-1)
+        end
+
+        # フォロー解除したら１件減る事を確認する
+        it "should decrement the other user's followers count" do
+          expect do
+            click_button "Unfollow"
+          end.to change(other_user.followers, :count).by(-1)
+        end
+
+        describe "toggling the button" do
+          before { click_button "Unfollow" }
+          it { should have_xpath("//input[@value='Follow']") }
+        end
+      end
+    end
   end
 
   describe "signup" do
