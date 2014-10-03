@@ -8,8 +8,18 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, length: { minimum: 6 }
   has_many :microposts,dependent: :destroy
+
+  # フォローしているユーザーID
+  # |user| 1---n |relationships| n---1 |followed_users|
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
+
+  # フォローされているユーザーID
+  # |user| 1---n |reverse_relationships(Relationship)| n---1 |followers|
+  has_many :reverse_relationships, foreign_key: "followed_id",
+                                   class_name:  "Relationship",
+                                   dependent:   :destroy
+  has_many :followers, through: :reverse_relationships, source: :follower
 
   def User.new_remember_token
     SecureRandom.urlsafe_base64
