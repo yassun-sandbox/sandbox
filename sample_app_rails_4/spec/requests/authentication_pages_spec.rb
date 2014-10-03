@@ -116,6 +116,7 @@ describe "Authentication" do
                 before { visit users_path }
                 it { should have_title('Sign in') }
               end
+
             end
 
             # フォローユーザーとフォロワーユーザーでログインチェックされるか
