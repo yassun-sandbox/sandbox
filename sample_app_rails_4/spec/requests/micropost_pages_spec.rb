@@ -37,8 +37,25 @@ describe "Micropost pages" do
         expect { click_button "Post" }.to change(Micropost, :count).by(1)
       end
 
+      # 一件しかデータが存在しない場合は、複数形にならない事を確認
+      describe "post 1 micropost" do
+        before { click_button "Post" }
+        it {should have_content('1 micropost')}
+      end
+
+      # 一件しかデータが存在しない場合は、複数形にならない事を確認
+      describe "post 2 microposts" do
+        before do
+            click_button "Post"
+            fill_in 'micropost_content', with: "Lorem ipsum"
+            click_button "Post"
+        end
+        it {should have_content('2 microposts')}
+      end
+
     end
 
+    # 削除の確認
     describe "micropost destruction" do
       before { FactoryGirl.create(:micropost, user: user) }
 
