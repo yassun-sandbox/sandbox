@@ -25,6 +25,8 @@ describe User do
   it { should respond_to(:feed) }
   it { should respond_to(:relationships) }
   it { should respond_to(:followed_users) }
+  it { should respond_to(:reverse_relationships) }
+  it { should respond_to(:followers) }
   it { should respond_to(:following?) }
   it { should respond_to(:follow!) }
   it { should respond_to(:unfollow!) }
@@ -183,20 +185,35 @@ describe User do
 
   end
 
+  # フォローのテスト
   describe "following" do
+
+    # 別のユーザーを準備
     let(:other_user) { FactoryGirl.create(:user) }
+
+    # 最初のユーザーから別のユーザーをフォローさせる
     before do
       @user.save
       @user.follow!(other_user)
     end
 
+    # followingメソッドの確認
     it { should be_following(other_user) }
+
+    # followed_usersに別ユーザーが含まれているか
     its(:followed_users) { should include(other_user) }
 
+    # other_user視点からfollowersを実行した場合、Userが取得出来ているか
+    describe "followed user" do
+      subject { other_user }
+      its(:followers) { should include(@user) }
+    end
 
+    # フォロー解除
     describe "and unfollowing" do
       before { @user.unfollow!(other_user) }
 
+      # Userのフォロー一覧に含まれていない事の確認
       it { should_not be_following(other_user) }
       its(:followed_users) { should_not include(other_user) }
     end
