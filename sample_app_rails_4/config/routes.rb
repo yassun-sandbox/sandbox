@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
-  resources :users
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
   resources :sessions, only: [:new, :create, :destroy]
   resources :microposts, only: [:create, :destroy]
   root  'static_pages#home'
