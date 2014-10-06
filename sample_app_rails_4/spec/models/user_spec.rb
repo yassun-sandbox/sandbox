@@ -234,6 +234,34 @@ describe User do
 
   end
 
+  # ユーザーを削除した場合にrelationshipの内容も削除されている事の確認
+  describe "relationship associations" do
+    let(:other_user) { FactoryGirl.create(:user) }
+    before do
+      @user.save
+    end
+
+    it "should destroy followed user" do
+      @user.follow!(other_user)
+      relationships = @user.relationships.to_a
+      other_user.destroy
+      expect(relationships).not_to be_empty
+      relationships.each do |relationship|
+        expect(Relationship.where(id: relationship.id)).to be_empty
+      end
+    end
+
+    it "should destroy follower user" do
+      @user.follow!(other_user)
+      relationships = @user.relationships.to_a
+      @user.destroy
+      expect(relationships).not_to be_empty
+      relationships.each do |relationship|
+        expect(Relationship.where(id: relationship.id)).to be_empty
+      end
+    end
+  end
+
 
 end
 
