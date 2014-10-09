@@ -14,5 +14,12 @@ class Book < ActiveRecord::Base
   validates :name, length: { maximum:15 }
   validates :price, numericality: { greater_than_or_equal_to: 0 }
 
+  # コールバック
+  before_validation do |book|
+    book.name = book.name.gsub(/Cat/) do |matched|
+      "lovely #{matched}"
+    end
+  end
+
 end
 
