@@ -1,6 +1,19 @@
 Rails.application.routes.draw do
   get "/books/:id" => "books#show"
-  resources :publishers
+
+  resources :publishers do
+    #/publishers/:id/以降に追加
+
+    #更にRESTを追加
+    resources :books
+
+    # detail_publisher GET /publishers/:id/detail(.:format) publishers#detail
+    member do
+      get 'detail'
+    end
+
+  end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
