@@ -1,4 +1,5 @@
 class Book < ActiveRecord::Base
+  enum status: %w(reservation now_on_sale end_of_price)
   scope :costly, -> { where("price > ?", 3000) }
   scope :written_about, ->(theme) { where("name like ?","%#{theme}%") }
 
