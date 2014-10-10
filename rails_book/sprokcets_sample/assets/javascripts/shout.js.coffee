@@ -1,3 +1,0 @@
-shout = ->
-  alert("Hellooooooo!!")
-
