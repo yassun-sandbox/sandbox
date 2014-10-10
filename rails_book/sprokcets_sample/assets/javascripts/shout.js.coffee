@@ -1,0 +1,3 @@
+shout = ->
+  alert("Hellooooooo!!")
+
