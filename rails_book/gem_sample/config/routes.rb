@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :models
-
   resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
