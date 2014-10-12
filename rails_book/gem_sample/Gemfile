@@ -42,3 +42,7 @@ gem 'pry-rails',        group: [:development,:test]
 gem 'pry-debugger',        group: [:development,:test]
 
 
+gem 'hirb',        group: [:development,:test]
+gem 'hirb-unicode',        group: [:development,:test]
+
+
