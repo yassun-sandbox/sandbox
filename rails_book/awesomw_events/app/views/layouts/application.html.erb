@@ -8,7 +8,18 @@
 </head>
 <body>
 
-<%= yield %>
+<header class="navbar navbar-default" role="navigation">
+  <div class="continer">
+      <div class="navbar-header">
+        <%= link_to 'AwesomeEvents', root_path, class: 'navbar-brand' %>
+      </div>
+  </div>
+</header>
+
+<div class="container">
+  <%= yield %>
+</div>
 
 </body>
 </html>
+
