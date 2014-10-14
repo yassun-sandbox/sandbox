@@ -1,6 +1,8 @@
 class Event < ActiveRecord::Base
-  belongs_to :owner, class_name: 'User'
+  #mount_uploader :event_image, EventImageUploader
+
   has_many :tickets, dependent: :destroy
+  belongs_to :owner, class_name: 'User'
 
   validates :name, length: { maximum: 50 }, presence: true
   validates :place, length: { maximum: 100 }, presence: true
@@ -23,8 +25,7 @@ class Event < ActiveRecord::Base
     []
   end
 
-
-private
+  private
 
   def start_time_should_be_before_end_time
     return unless start_time && end_time
@@ -34,3 +35,4 @@ private
     end
   end
 end
+
