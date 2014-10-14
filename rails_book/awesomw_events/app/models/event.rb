@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
   belongs_to :owner, class_name: 'User'
-  has_many :tickets
+  has_many :tickets, dependent: :destory
 
   validates :name, length: { maximum: 50 }, presence: true
   validates :place, length: { maximum: 100 }, presence: true
