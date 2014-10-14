@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141013105815) do
+ActiveRecord::Schema.define(version: 20141014054217) do
+
+  create_table "events", force: true do |t|
+    t.integer  "owner_id"
+    t.string   "name"
+    t.string   "place"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "events", ["owner_id"], name: "index_events_on_owner_id"
 
   create_table "users", force: true do |t|
     t.string   "provider"
