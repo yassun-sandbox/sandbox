@@ -9,12 +9,25 @@ class EventsController < ApplicationController
     @event = current_user.created_events.build
   end
 
+  def edit
+    @event = current_user.created_events.find(params[:id])
+  end
+
   def create
     @event = current_user.created_events.build(event_params)
     if @event.save
       redirect_to @event, notice: '作成しました'
     else
       render :new
+    end
+  end
+
+  def update
+    @event = current_user.created_events.find(params[:id])
+    if @event.update_attributes(event_params)
+      redirect_to @event, notice: '更新しました'
+    else
+      render :edit
     end
   end
 
