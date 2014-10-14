@@ -50,8 +50,9 @@
 
     <% end %>
 
-    <% if logged_in?%>
-
+    <% if @ticket %>
+      <%= link_to '参加をキャンセルする', event_ticket_path(@event, @ticket), method: :delete, class: 'btn btn-warning btn-lg btn-block' %>
+    <% elsif logged_in? %>
       <button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#createTicket">
         参加する
       </button>
