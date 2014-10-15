@@ -2,10 +2,6 @@
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require 'rspec/autorun'
-require 'minitest/autorun'
-require 'shoulda-matchers'
-require 'factory_girl'
 
 
 # Requires supporting ruby files with custom matchers and macros, etc,
