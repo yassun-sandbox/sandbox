@@ -27,7 +27,8 @@ end
 
 group :test do
   gem 'capybara', '~> 2.4'
-  # 便利マッチャー集
   gem "shoulda-matchers"
+  gem 'poltergeist', '~> 1.5.0'
+  gem 'database_cleaner', '~> 1.2.0'
 end
 
