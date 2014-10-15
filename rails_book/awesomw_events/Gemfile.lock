@@ -161,6 +161,7 @@ DEPENDENCIES
   jquery-rails
   kaminari (~> 0.15.1)
   kaminari-bootstrap (~> 3.0.1)
+  minitest
   omniauth (~> 1.2.1)
   omniauth-twitter (~> 1.0.1)
   rails (= 4.1.5)

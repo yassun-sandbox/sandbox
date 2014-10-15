@@ -20,5 +20,7 @@ gem 'carrierwave', '~> 0.10.0'
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'minitest'
 end
+
 

@@ -15,11 +15,11 @@ ActiveRecord::Schema.define(version: 20141014115357) do
 
   create_table "events", force: true do |t|
     t.integer  "owner_id"
-    t.string   "name"
-    t.string   "place"
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.text     "content"
+    t.string   "name",        null: false
+    t.string   "place",       null: false
+    t.datetime "start_time",  null: false
+    t.datetime "end_time",    null: false
+    t.text     "content",     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "event_image"
