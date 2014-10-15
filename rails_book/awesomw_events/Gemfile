@@ -23,4 +23,8 @@ group :development, :test do
   gem 'minitest'
 end
 
+group :test do
+  # 便利マッチャー集
+  gem "shoulda-matchers"
+end
 

@@ -3,6 +3,8 @@ require 'spec_helper'
 describe Event do
   describe '#name' do
 
+    it { should validate_presence_of(:name) }
+
     context 'nilの場合' do
       let(:event){ Event.new(name:nil) }
 
@@ -20,6 +22,7 @@ describe Event do
         expect(event.errors[:name]).to be_present
       end
     end
+
 
     context '「Rails勉強会」の場合' do
       let(:event){ Event.new(name:'Rails勉強会') }
