@@ -19,8 +19,9 @@ gem "ransack", '~> 1.2.2'
 gem 'carrierwave', '~> 0.10.0'
 
 group :development, :test do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 3.0.0'
   gem 'minitest'
+  gem 'factory_girl_rails'
 end
 
 group :test do
