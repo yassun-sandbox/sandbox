@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ENV['NOKOGIRI_USE_SYSTEM_LIBRARIES'] = 'YES'
 
 gem 'rails', '4.1.5'
 gem 'sqlite3'
@@ -17,6 +17,7 @@ gem 'kaminari', '~> 0.15.1'
 gem 'kaminari-bootstrap', '~> 3.0.1'
 gem "ransack", '~> 1.2.2'
 gem 'carrierwave', '~> 0.10.0'
+gem 'nokogiri', '1.6.1'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
@@ -25,6 +26,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'capybara', '~> 2.4'
   # 便利マッチャー集
   gem "shoulda-matchers"
 end
