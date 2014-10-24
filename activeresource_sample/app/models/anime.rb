@@ -1,2 +1,2 @@
-class Anime < ActiveRecord::Base
+class Anime < ActiveResource::Base
 end
