@@ -36,7 +36,9 @@ describe Contact do
 
   end
 
-  it "連絡先のフルネームを文字列として返すこと"
-
+  it "連絡先のフルネームを文字列として返すこと" do
+    contact = Contact.new(firstname: 'John', lastname: 'Doe', email: 'johndoe@example.com')
+    expect(contact.name).to eq 'John Doe'
+  end
 
 end
