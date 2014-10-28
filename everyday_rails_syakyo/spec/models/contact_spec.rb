@@ -41,4 +41,12 @@ describe Contact do
     expect(contact.name).to eq 'John Doe'
   end
 
+  it "マッチした結果をソート済みの配列として返すこと" do
+    smith = Contact.create(firstname: 'John', lastname: 'Smith', email: 'jsmith@example.com')
+    Contact.create(firstname: 'Tim', lastname: 'Jones', email: 'tjones@example.com')
+    Contact.create(firstname: 'John', lastname: 'Johnson', email: 'jjohnson@example.com')
+
+    expect(Contact.by_letter("J")).to_not include smith
+  end
+
 end
