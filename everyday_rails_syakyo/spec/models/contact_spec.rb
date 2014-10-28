@@ -41,12 +41,28 @@ describe Contact do
     expect(contact.name).to eq 'John Doe'
   end
 
-  it "マッチした結果をソート済みの配列として返すこと" do
-    smith = Contact.create(firstname: 'John', lastname: 'Smith', email: 'jsmith@example.com')
-    Contact.create(firstname: 'Tim', lastname: 'Jones', email: 'tjones@example.com')
-    Contact.create(firstname: 'John', lastname: 'Johnson', email: 'jjohnson@example.com')
+  describe "文字で姓をフィルタする" do
+    context "マッチする文字の場合" do
+      it "マッチした結果をソート済みの配列として返すこと" do
+        Contact.create(firstname: 'John', lastname: 'Smith', email: 'jsmith@example.com')
+        jones   = Contact.create(firstname: 'Tim', lastname: 'Jones', email: 'tjones@example.com')
+        johnson  = Contact.create(firstname: 'John', lastname: 'Johnson', email: 'jjohnson@example.com')
 
-    expect(Contact.by_letter("J")).to_not include smith
+        expect(Contact.by_letter("J")).to eq [johnson,jones]
+      end
+    end
+
+    context "マッチしない文字の場合" do
+      it "マッチした結果をソート済みの配列として返すこと" do
+        smith = Contact.create(firstname: 'John', lastname: 'Smith', email: 'jsmith@example.com')
+        Contact.create(firstname: 'Tim', lastname: 'Jones', email: 'tjones@example.com')
+        Contact.create(firstname: 'John', lastname: 'Johnson', email: 'jjohnson@example.com')
+
+        expect(Contact.by_letter("J")).to_not include smith
+      end
+    end
+
   end
+
 
 end
