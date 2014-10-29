@@ -16,8 +16,18 @@ describe ContactsController do
   end
 
   describe 'GET #show' do
-    it "@contact に要求された連絡先を割り当てること"
-    it ":show テンプレートを表示すること"
+    it "@contact に要求された連絡先を割り当てること" do
+      contact = FactoryGirl.create(:contact)
+      get :show, id: contact
+      expect(assigns(:contact)).to eq contact
+    end
+
+    it ":show テンプレートを表示すること" do
+      contact = FactoryGirl.create(:contact)
+      get :show, id: contact
+      expect(response).to render_template :show
+    end
+
   end
 
   describe 'GET #new' do
