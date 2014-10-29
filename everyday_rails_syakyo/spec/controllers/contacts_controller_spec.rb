@@ -117,21 +117,61 @@ describe ContactsController do
   end
 
   describe 'PATCH #update' do
+    before :each do
+        @contact = FactoryGirl.create(:contact, firstname: 'Lawrence', lastname: 'Smith')
+    end
+
     context "有効な属性の場合" do
-      it "データベースの連絡先を更新すること"
-      it "更新した連絡先のページへリダイレクトすること"
+
+      it "要求された @contact を取得すること" do
+        patch :update, id: @contact, contact: FactoryGirl.attributes_for(:contact)
+        expect(assigns(:contact)).to eq(@contact)
+      end
+
+      it "@contact の属性を変更すること" do
+        patch :update, id: @contact, contact: FactoryGirl.attributes_for(:contact, firstname: "Larry", lastname: "Smith")
+        @contact.reload
+        expect(@contact.firstname).to eq("Larry")
+        expect(@contact.lastname).to eq("Smith")
+      end
+
+      it "更新した連絡先のページへリダイレクトすること" do
+        patch :update, id: @contact, contact: FactoryGirl.attributes_for(:contact)
+        expect(response).to redirect_to @contact
+      end
+
     end
 
     context "無効な属性の場合" do
-      it "連絡先を更新しないこと"
-      it ":edit テンプレートを再表示すること"
+
+      it "連絡先を更新しないこと" do
+        patch :update, id: @contact, contact: FactoryGirl.attributes_for(:contact, firstname: "Larry", lastname: nil)
+        @contact.reload
+        expect(@contact.firstname).to_not eq("Larry")
+        expect(@contact.lastname).to eq("Smith")
+      end
+
+      it ":edit テンプレートを再表示すること" do
+        patch :update, id: @contact, contact: FactoryGirl.attributes_for(:invalid_contact)
+        expect(response).to render_template :edit
+      end
     end
   end
 
   describe 'DELETE #destroy' do
-    it "データベースから連絡先を削除すること"
-    it "contacts#index にリダイレクトすること"
-  end
+    before :each do
+      @contact = FactoryGirl.create(:contact)
+    end
 
+    it "データベースから連絡先を削除すること" do
+      expect{ delete :destroy, id: @contact }.to change(Contact, :count).by(-1)
+    end
+
+    it "contacts#index にリダイレクトすること" do
+      delete :destroy, id: @contact
+      expect(response).to redirect_to contacts_url
+    end
+
+  end
 end
 
