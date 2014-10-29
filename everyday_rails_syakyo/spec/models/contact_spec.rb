@@ -2,6 +2,10 @@ require'spec_helper'
 
 describe Contact do
 
+  it "有効なファクトリを持つこと" do 
+    expect(FactoryGirl.build(:contact)).to be_valid
+  end
+
   it "姓と名とメールがあれば有効な状態であること" do
     contact = Contact.new(
       firstname: 'Aaron',
@@ -12,33 +16,29 @@ describe Contact do
   end
 
   it "名がなければ無効な状態であること" do
-    expect(Contact.new(firstname: nil)).to have(1).errors_on(:firstname)
+    contact = FactoryGirl.build(:contact, firstname: nil)
+    expect(contact).to have(1).errors_on(:firstname)
   end
 
   it "姓がなければ無効な状態であること" do
-    expect(Contact.new(lastname: nil)).to have(1).errors_on(:firstname)
+    contact = FactoryGirl.build(:contact, lastname: nil)
+    expect(contact).to have(1).errors_on(:lastname)
   end
 
   it "メールアドレスがなければ無効な状態であること" do
-    expect(Contact.new(email: nil)).to have(1).errors_on(:firstname)
+    contact = FactoryGirl.build(:contact, email: nil)
+    expect(contact).to have(1).errors_on(:email)
   end
 
   it "重複したメールアドレスなら無効な状態であること" do
-   Contact.create(
-      firstname: 'Joe', lastname: 'Tester',
-        email: 'tester@example.com')
-
-   contact = Contact.new(
-      firstname: 'Jane', lastname: 'Tester',
-        email: 'tester@example.com')
-
-   expect(contact).to have(1).errors_on(:email)
-
+    FactoryGirl.create(:contact, email: "aaron@example.com")
+    contact = FactoryGirl.build(:contact, email: "aaron@example.com")
+    expect(contact).to have(1).errors_on(:email)
   end
 
   it "連絡先のフルネームを文字列として返すこと" do
-    contact = Contact.new(firstname: 'John', lastname: 'Doe', email: 'johndoe@example.com')
-    expect(contact.name).to eq 'John Doe'
+    contact = FactoryGirl.build(:contact,firstname: "Jane", lastname: "Doe")
+    expect(contact.name).to eq "Jane Doe"
   end
 
   describe "文字で姓をフィルタする" do
