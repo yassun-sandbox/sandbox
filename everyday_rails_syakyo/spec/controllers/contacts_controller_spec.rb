@@ -3,14 +3,34 @@ require'spec_helper'
 describe ContactsController do
 
   describe 'GET #index' do
+
     context 'params[:letter] がある場合' do
-      it "指定された文字で始まる連絡先を配列にまとめること"
-      it ":index テンプレートを表示すること"
+      it "指定された文字で始まる連絡先を配列にまとめること" do
+        smith = FactoryGirl.create(:contact, lastname: 'Smith')
+        FactoryGirl.create(:contact, lastname: 'Jones')
+        get :index, letter: 'S'
+        expect(assigns(:contacts)).to match_array([smith])
+      end
+
+      it ":index テンプレートを表示すること" do
+        get :index, letter: 'S'
+        expect(response).to render_template :index
+      end
     end
 
     context 'params[:letter] がない場合' do
-      it "全ての連絡先を配列にまとめること"
-      it ":index テンプレートを表示すること"
+
+      it "全ての連絡先を配列にまとめること" do
+        smith = FactoryGirl.create(:contact, lastname: 'Smith')
+        jones = FactoryGirl.create(:contact, lastname: 'Jones')
+        get :index
+        expect(assigns(:contacts)).to match_array([smith, jones])
+      end
+
+      it ":index テンプレートを表示すること" do
+        get :index
+        expect(response).to render_template :index
+      end
     end
 
   end
@@ -31,13 +51,31 @@ describe ContactsController do
   end
 
   describe 'GET #new' do
-    it "@contact に新しい連絡先を割り当てること"
-    it ":new テンプレートを表示すること"
+    it "@contact に新しい連絡先を割り当てること" do
+      get :new
+      expect(assigns(:contact)).to be_a_new(Contact)
+    end
+
+    it ":new テンプレートを表示すること" do
+      get :new
+      expect(response).to render_template :new
+    end
+
   end
 
   describe 'GET #edit' do
-    it "@contact に要求された連絡先を割り当てること" 
-    it ":edit テンプレートを表示すること"
+    it "@contact に要求された連絡先を割り当てること" do
+      contact = FactoryGirl.create(:contact)
+      get :edit, id: contact
+      expect(assigns(:contact)).to eq contact
+    end
+
+    it ":edit テンプレートを表示すること" do
+      contact = FactoryGirl.create(:contact)
+      get :edit, id: contact
+      expect(response).to render_template :edit
+    end
+
   end
 
   describe "POST #create" do
