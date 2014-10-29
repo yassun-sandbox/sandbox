@@ -79,16 +79,41 @@ describe ContactsController do
   end
 
   describe "POST #create" do
+    before :each do
+      @phones = [
+        FactoryGirl.attributes_for(:phone),
+        FactoryGirl.attributes_for(:phone),
+        FactoryGirl.attributes_for(:phone)
+      ]
+    end
+
     context "有効な属性の場合" do
-      it "データベースに新しい連絡先を保存すること"
-      it "contacts#show にリダイレクトすること"
+      it "データベースに新しい連絡先を保存すること" do
+        expect{
+            post :create, contact: FactoryGirl.attributes_for(:contact, phones_attributes: @phones)
+        }.to change(Contact, :count).by(1)
+      end
+
+      it "contacts#show にリダイレクトすること" do
+        post :create, contact: FactoryGirl.attributes_for(:contact, phones_attributes: @phones)
+        expect(response).to redirect_to contact_path(assigns[:contact])
+      end
     end
 
     context "無効な属性の場合" do
-      it "データベースに新しい連絡先を保存しないこと"
-      it ":new テンプレートを再表示すること"
-    end
+      it "データベースに新しい連絡先を保存しないこと" do
+        expect{
+          post :create,
+          contact: FactoryGirl.attributes_for(:invalid_contact)
+        }.to_not change(Contact, :count)
+      end
 
+      it ":new テンプレートを再表示すること" do
+        post :create,
+        contact: FactoryGirl.attributes_for(:invalid_contact)
+        expect(response).to render_template :new
+      end
+    end
   end
 
   describe 'PATCH #update' do
