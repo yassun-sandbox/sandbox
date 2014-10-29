@@ -6,6 +6,10 @@ describe Contact do
     expect(FactoryGirl.build(:contact)).to be_valid
   end
 
+  it "3 つの電話番号を持つこと" do
+    expect(FactoryGirl.create(:contact).phones.count).to eq 3
+  end
+
   it "姓と名とメールがあれば有効な状態であること" do
     contact = Contact.new(
       firstname: 'Aaron',
