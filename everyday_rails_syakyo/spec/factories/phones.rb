@@ -14,7 +14,7 @@ FactoryGirl.define do
     factory :mobile_phone do
       phone_type 'mobile'
     end
+
   end
 end
-￼￼￼￼￼￼
 
