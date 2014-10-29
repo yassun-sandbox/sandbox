@@ -10,15 +10,6 @@ describe Contact do
     expect(FactoryGirl.create(:contact).phones.count).to eq 3
   end
 
-  it "姓と名とメールがあれば有効な状態であること" do
-    contact = Contact.new(
-      firstname: 'Aaron',
-      lastname: 'Sumner',
-      email: 'tester@example.com')
-
-    expect(contact).to be_valid
-  end
-
   it "名がなければ無効な状態であること" do
     contact = FactoryGirl.build(:contact, firstname: nil)
     expect(contact).to have(1).errors_on(:firstname)
@@ -48,9 +39,9 @@ describe Contact do
   describe "文字で姓をフィルタする" do
 
     before :each do
-      @smith = Contact.create(firstname: 'John', lastname: 'Smith', email: 'jsmith@example.com')
-      @jones = Contact.create(firstname: 'Tim', lastname: 'Jones', email: 'tjones@example.com')
-      @johnson = Contact.create(firstname: 'John', lastname: 'Johnson', email: 'jjohnson@example.com') 
+      @smith   = FactoryGirl.create(:contact, lastname: 'Smith',   email: 'jsmith@example.com')
+      @jones   = FactoryGirl.create(:contact, lastname: 'Jones',   email: 'tjones@example.com')
+      @johnson = FactoryGirl.create(:contact, lastname: 'Johnson', email: 'jjohnson@example.com')
     end
 
     context "マッチする文字の場合" do
