@@ -2,7 +2,7 @@ require'spec_helper'
 
 feature 'User management' do
 
-  scenario "新しいユーザーを追加する" do
+  scenario "新しいユーザーを追加する", js: true do
     admin = FactoryGirl.create(:admin)
     sign_in admin
 
