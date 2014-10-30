@@ -4,7 +4,7 @@
 <ul>
   <% @news_releases.each do |news_release| %>
     <li>
-      <%= link_to "#{news_release.released_on.strftime('%Y-%m-%d')}: #{news_release.title}", news_release %>
+      <%= link_to news_release.title_with_date, news_release %>
     </li>
   <% end %>
 </ul>
