@@ -1,9 +1,12 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
+require'faker'
 
 FactoryGirl.define do
+
   factory :news_release do
-    title "MyString"
-    released_on "2014-10-30"
-    body "MyText"
+    title "Test news release"
+    released_on 1.day.ago
+    body { Faker::Lorem.paragraph }
   end
+
 end
+
