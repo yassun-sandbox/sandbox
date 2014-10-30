@@ -2,6 +2,47 @@ require'spec_helper'
 
 describe ContactsController do
 
+  describe"guestaccess"do
+
+    describe 'GET #new' do
+
+      it "ログインを要求すること" do
+        get :new
+        expect(response).to redirect_to login_url
+      end
+    end
+
+    describe 'GET #edit' do
+      it "ログインを要求すること" do
+        contact = FactoryGirl.create(:contact)
+        get :edit, id: contact
+        expect(response).to redirect_to login_url
+      end
+    end
+
+    describe "POST #create" do
+      it "ログインを要求すること" do
+        post :create, id: FactoryGirl.create(:contact), contact: FactoryGirl.attributes_for(:contact)
+        expect(response).to redirect_to login_url
+      end
+    end
+
+    describe 'PUT #update' do
+      it "ログインを要求すること" do
+        put :update, id: FactoryGirl.create(:contact), contact: FactoryGirl.attributes_for(:contact)
+        expect(response).to redirect_to login_url
+      end
+    end
+
+    describe 'DELETE #destroy' do
+      it "ログインを要求すること" do
+        delete :destroy, id: FactoryGirl.create(:contact)
+        expect(response).to redirect_to login_url
+      end
+    end
+
+  end
+
   describe "administrator access" do
     before :each do
       user = FactoryGirl.create(:admin)
