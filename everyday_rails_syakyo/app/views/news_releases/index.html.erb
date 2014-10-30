@@ -1,0 +1,31 @@
+<h1>Listing news_releases</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Released on</th>
+      <th>Body</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @news_releases.each do |news_release| %>
+      <tr>
+        <td><%= news_release.title %></td>
+        <td><%= news_release.released_on %></td>
+        <td><%= news_release.body %></td>
+        <td><%= link_to 'Show', news_release %></td>
+        <td><%= link_to 'Edit', edit_news_release_path(news_release) %></td>
+        <td><%= link_to 'Destroy', news_release, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New News release', new_news_release_path %>
