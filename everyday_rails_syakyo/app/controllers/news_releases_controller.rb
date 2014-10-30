@@ -24,17 +24,20 @@ class NewsReleasesController < ApplicationController
   # POST /news_releases
   # POST /news_releases.json
   def create
-    @news_release = NewsRelease.new(news_release_params)
+
+   @news_release = NewsRelease.new(news_release_params)
 
     respond_to do |format|
       if @news_release.save
-        format.html { redirect_to @news_release, notice: 'News release was successfully created.' }
+        format.html { redirect_to news_releases_url,
+            notice: 'Successfully created news release.' }
         format.json { render action: 'show', status: :created, location: @news_release }
       else
         format.html { render action: 'new' }
         format.json { render json: @news_release.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PATCH/PUT /news_releases/1
