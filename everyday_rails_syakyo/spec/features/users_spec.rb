@@ -4,11 +4,7 @@ feature 'User management' do
 
   scenario "新しいユーザーを追加する" do
     admin = FactoryGirl.create(:admin)
-    visit root_path
-    click_link 'Log In'
-    fill_in 'Email', with: admin.email
-    fill_in 'Password', with: admin.password
-    click_button 'Log In'
+    sign_in admin
 
     visit root_path
     expect{
