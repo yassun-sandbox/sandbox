@@ -1,7 +1,7 @@
 class JsonTransferService
   class << self
 
-    def execute
+    def execute(json)
       hoge
       huga
     end

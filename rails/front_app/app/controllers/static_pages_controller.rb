@@ -1,7 +1,9 @@
 class StaticPagesController < ApplicationController
 
   def home
-    JsonTransferService.execute
+    json = JsonApiClient.new.call
+    @view_json = JsonTransferService.execute(json)
   end
 
 end
+
