@@ -28,5 +28,6 @@ module FrontApp
     # config.i18n.default_locale = :de
 
     config.autoload_paths << "#{config.root}/app/services"
+    config.autoload_paths << "#{config.root}/lib/api_clients"
   end
 end
