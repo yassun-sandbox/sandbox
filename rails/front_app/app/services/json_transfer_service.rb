@@ -4,7 +4,7 @@ class JsonTransferService
     def execute(user1, user2)
       hoge(user1)
       fuga(user2)
-      { hoge:user1, fuga:user2 }
+      [user1, user2]
     end
 
     private

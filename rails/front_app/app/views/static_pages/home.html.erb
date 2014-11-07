@@ -1,8 +1,7 @@
-HOMEHOMEHOE
-HOMEHOMEHOE
-HOMEHOMEHOE
-HOMEHOMEHOE
-HOMEHOMEHOE
-HOMEHOMEHOE
-HOMEHOMEHOE
+<% @users.each do | user | %>
+  <h1><%= user["name"] %></h1>
+  <ul class="users">
+    <%= render :partial=>'list_item', locals: { user: user } %>
+  </ul>
+<% end %>
 
