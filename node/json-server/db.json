@@ -2,14 +2,13 @@
   "users": [
     {
       "id": 1,
-      "name": "futoase"
+      "name": "hogehoge",
+      "tel": "000-0000-0000"
     },
     {
       "id": 2,
-      "name": "hogehoge"
+      "name": "fugafuga",
+      "tel": "111-1111-1111"
     }
-  ],
-  "limit": 100,
-  "favicon.ico": []
+  ]
 }
-
