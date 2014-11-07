@@ -1,20 +1,22 @@
 class JsonTransferService
   class << self
 
-    def execute(json)
-      hoge
-      huga
+    def execute(user1, user2)
+      hoge(user1)
+      fuga(user2)
+      { hoge:user1, fuga:user2 }
     end
 
     private
 
-    def hoge
-      puts "hugahuga"
+    def hoge(user)
+      user["type"] = "HOGE"
     end
 
-    def huga
-      puts "hugahuga"
+    def fuga(user)
+      user["type"] = "FUGA"
     end
+
   end
 end
 
