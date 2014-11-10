@@ -95,3 +95,11 @@ def fixture(file)
   File.new(File.join(fixture_path, file))
 end
 
+def fixture_json(file)
+  open(File.join(fixture_path, file)) do |io|
+    JSON.load(io)
+  end
+end
+
+JSON_API_URL = 'http://localhost:3333'
+

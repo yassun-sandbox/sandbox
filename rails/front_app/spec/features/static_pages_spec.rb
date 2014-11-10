@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-JSON_API_URL = 'http://localhost:3333'
 
 RSpec.describe 'StaticPages', :type => :feature do
   subject { page }
