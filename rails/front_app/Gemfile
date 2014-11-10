@@ -16,6 +16,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'spring-commands-rspec'
   gem 'guard-rspec'
+  gem 'launchy'
 end
 
 group :development do
