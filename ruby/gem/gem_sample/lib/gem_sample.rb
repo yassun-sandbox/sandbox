@@ -1,5 +1,7 @@
 require "gem_sample/version"
 
 module GemSample
-  # Your code goes here...
+  def self.hello_Pruby
+    p "hello pruby!!"
+  end
 end
