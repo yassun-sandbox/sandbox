@@ -11,6 +11,9 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 
+# app server
+gem 'unicorn'
+
 group :development, :test do
   gem 'spring'
   gem 'rspec-rails'
