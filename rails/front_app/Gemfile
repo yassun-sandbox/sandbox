@@ -9,11 +9,14 @@ gem 'uglifier', '>= 1.3.0'
 # javascript
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
+
+# json
 gem 'jbuilder', '~> 2.0'
 
 # app server
 gem 'unicorn'
 
+# deploy
 gem 'capistrano'
 
 group :development, :test do
@@ -25,7 +28,10 @@ group :development, :test do
 end
 
 group :development do
+  # REPL
   gem 'pry-rails'
+  gem 'pry-byebug'
+  # エラー画面でREPL操作
   gem 'better_errors'
   gem 'binding_of_caller'
 end
@@ -33,7 +39,6 @@ end
 group  :test do
   gem 'capybara'
   gem 'poltergeist'
-  gem 'shoulda'
   gem 'vcr'
   gem 'webmock'
 end
