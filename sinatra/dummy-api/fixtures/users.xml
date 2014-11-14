@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<users>
+  <id>1</id>
+  <name>hogehoge</name>
+  <tel>111-1111-1111</tel>
+</users>
+<users>
+  <id>2</id>
+  <name>fugafuga</name>
+  <tel>222-2222-2222</tel>
+</users>
+
