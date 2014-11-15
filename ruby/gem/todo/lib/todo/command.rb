@@ -19,7 +19,7 @@ module Todo
       task.destroy
     end
 
-    def update_task(id, attrbiutes)
+    def update_task(id, attributes)
       if status_name = attributes[:status]
         attributes[:status] = Task::STATUS.fetch(status_name.upcase)
       end
@@ -32,14 +32,12 @@ module Todo
 
     def find_tasks(status_name)
       all_tasks = Task.order('created_at DESC')
-
       if status_name
         status = Task::STATUS.fetch(status_name.upcase)
-        all_tasks.status_id(status)
+        all_tasks.status_is(status)
       else
         all_tasks
       end
-
     end
 
   end
