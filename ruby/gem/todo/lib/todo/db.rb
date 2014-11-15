@@ -31,7 +31,7 @@ module Todo
       connection.create_table :tasks do |t|
         t.column :name,    :string,  null:false
         t.column :content, :text,    null:false
-        t.column :status,  :integer, defalut:0 ,null:false
+        t.column :status,  :integer, default:0 ,null:false
         t.timestamps
       end
 
