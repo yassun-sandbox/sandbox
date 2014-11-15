@@ -14,6 +14,11 @@ module Todo
       Task.create!(name: name, content: content, status: 0).reload
     end
 
+    def delete_task(id)
+      task = Task.find(id)
+      task.destroy
+    end
+
   end
 
 end
