@@ -14,7 +14,7 @@ module Todo
       database_path = File.join(ENV['HOME'], '.todo', 'todo.sqlite3')
 
       connect_database database_path
-      create_table_id_not_exeits database_path
+      create_table_id_not_exists database_path
     end
 
     def self.connect_database(path)
@@ -31,7 +31,7 @@ module Todo
       connection.create_table :tasks do |t|
         t.column :name,    :string,  null:false
         t.column :content, :text,    null:false
-        t.column :status,  :integer, null:false
+        t.column :status,  :integer, defalut:0 ,null:false
         t.timestamps
       end
 
