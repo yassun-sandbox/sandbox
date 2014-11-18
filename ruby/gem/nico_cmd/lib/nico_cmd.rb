@@ -1,5 +1,4 @@
+require "nico_cmd/command"
 require "nico_cmd/version"
 
-module NicoCmd
-  # Your code goes here...
-end
+
