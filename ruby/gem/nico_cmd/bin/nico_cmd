@@ -1,0 +1,2 @@
+require 'nico_cmd'
+NicoCmd::Command.start
