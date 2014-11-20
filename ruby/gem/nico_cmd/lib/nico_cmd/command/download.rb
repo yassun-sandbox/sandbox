@@ -4,8 +4,9 @@ module NicoCmd
   class Command < Thor
 
     desc 'download', 'download video'
-    option :sm,  :type => :array,  :aliases => '-s',  :required => true, :desc => "sm number"
-    option :mp3, :type => :boolean, :aliases => '-m', :required => true, :desc => "mp3 convert"
+    option :sm,  :type => :array,  :aliases => '-s',   :required => true, :desc => "sm number"
+    option :mp3, :type => :boolean, :aliases => '-m',  :desc => "mp3 convert"
+    option :text, :type => :boolean, :aliases => '-t', :desc => "explanation text"
     def download
       login unless @niconico
 
