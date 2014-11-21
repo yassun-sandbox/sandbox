@@ -18,6 +18,16 @@ module NicoCmd
         # 動画ファイルの保存
         open("#{id}.flv", "w"){|f| f.write video.get_video }
 
+        # 説明文の保存
+        open("#{id}.html", "w") do |f|
+          f.write '<html lang="ja">'
+          f.write '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />'
+          f.write  %Q[<h1>#{video.title}</h1>]
+          f.write  %Q[<a href="#{video.url}">#{video.id}</a>]
+          f.write video.description
+          f.write '</html>'
+        end
+
       end
 
     end
