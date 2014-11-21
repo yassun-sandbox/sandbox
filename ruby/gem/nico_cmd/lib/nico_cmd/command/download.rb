@@ -15,6 +15,9 @@ module NicoCmd
         # 動画情報の取得
         video = @niconico.video(id)
 
+        # 動画ファイルの保存
+        open("#{id}.flv", "w"){|f| f.write video.get_video }
+
       end
 
     end
