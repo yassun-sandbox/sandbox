@@ -10,21 +10,12 @@ module NicoCmd
     def download
       login unless @niconico
 
-      ids = options[:sm]
+      options[:sm].each do | id |
 
-#
-#      # 動画情報の取得
-#      video = @niconico.video(id)
-#      puts video.id
-#      puts video.title
-#      puts video.description
-#      puts video.description_raw
-#      puts video.url
-#      puts video.video_url
-#      puts video.type
-#      puts video.tags
-#      puts video.mylist_comment
-#      puts video.api_data
+        # 動画情報の取得
+        video = @niconico.video(id)
+
+      end
 
     end
 
