@@ -18,7 +18,7 @@ RSpec.describe "Tasks", :type => :feature do
       click_button "追加"
 
       expect(page).to have_content('タスク一覧')
-      #expect(page).to have_content('おしごと１')
+      expect(page).to have_content('おしごと１')
     end
   end
 
