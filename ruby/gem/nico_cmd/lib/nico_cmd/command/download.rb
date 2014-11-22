@@ -6,7 +6,8 @@ module NicoCmd
     desc 'download', 'download video'
     option :sm,  :type => :array,  :aliases => '-s',   :required => true, :desc => "sm number"
     option :mp3, :type => :boolean, :aliases => '-m',  :desc => "mp3 convert"
-    option :html, :type => :boolean, :aliases => '-t', :desc => "explanation text"
+    option :html,:type => :boolean, :aliases => '-t', :desc => "explanation text"
+    option :dir, :type => :text, :aliases => '-d',    :desc => "target dir"
     def download
       login unless @niconico
 
@@ -29,7 +30,6 @@ module NicoCmd
             f.write video.description
             f.write '</html>'
           end
-
         end
 
       end
