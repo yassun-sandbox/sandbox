@@ -1,1 +1,10 @@
-<title>タスク追加</title>
+<h1>タスク追加</h1>
+
+<%= form_for(@task) do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.label :contents %>
+  <%= f.text_field :contents %>
+  <%= f.submit "追加" %>
+<% end %>
+
