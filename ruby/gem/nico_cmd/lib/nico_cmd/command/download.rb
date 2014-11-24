@@ -7,7 +7,7 @@ module NicoCmd
     option :sm,  :type => :array,   :aliases => '-s',   :required => true, :desc => "sm number"
     option :mp3, :type => :boolean, :aliases => '-m',   :desc => "mp3 convert"
     option :html,:type => :boolean, :aliases => '-t',   :desc => "explanation text"
-    option :dir, :type => :text,    :aliases => '-d',   :desc => "target dir"
+    option :dir, :type => :string,  :aliases => '-d',   :desc => "target dir"
     def download
       login unless @niconico
 
@@ -15,8 +15,6 @@ module NicoCmd
 
         # 動画情報の取得
         video = @niconico.video(id)
-
-        # 保存先パスの作成
 
         # 動画ファイルの保存
         open("#{id}.flv", "w"){|f| f.write video.get_video }
@@ -46,6 +44,7 @@ module NicoCmd
       @niconico = Niconico.new(user["mail"], user["pass"])
       @niconico.login
     end
+
 
   end
 
