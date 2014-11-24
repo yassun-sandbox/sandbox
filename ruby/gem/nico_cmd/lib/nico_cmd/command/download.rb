@@ -11,18 +11,24 @@ module NicoCmd
     def download
       login unless @niconico
 
+      unless options[:dir] then
+        target_dir = "./"
+      else
+        target_dir = File.expand_path(options[:dir])
+      end
+
       options[:sm].each do | id |
 
         # 動画情報の取得
         video = @niconico.video(id)
 
         # 動画ファイルの保存
-        open("#{id}.flv", "w"){|f| f.write video.get_video }
+        open(File.join(target_dir, "#{id}.flv"), "w"){|f| f.write video.get_video }
 
         # 説明文の保存
         if options[:html] then
 
-          open("#{id}.html", "w") do |f|
+          open(File.join(target_dir, "#{id}.html"), "w") do |f|
             f.write '<html lang="ja">'
             f.write '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />'
             f.write  %Q[<h1>#{video.title}</h1>]
