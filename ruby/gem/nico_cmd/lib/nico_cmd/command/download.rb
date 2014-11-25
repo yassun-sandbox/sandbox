@@ -23,7 +23,7 @@ module NicoCmd
         flv_path = dl_flv(target_dir, video)
 
         # 説明文の保存
-        build_ext_text(target_dir, video) if options[:html]
+        dl_ext_text(target_dir, video) if options[:html]
 
       end
 
@@ -46,7 +46,7 @@ module NicoCmd
       end
     end
 
-    def build_ext_text(target_dir, video)
+    def dl_ext_text(target_dir, video)
       open(File.join(target_dir, "#{video.id}.html"), "w") do |f|
         f.write '<html lang="ja">'
         f.write '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />'
