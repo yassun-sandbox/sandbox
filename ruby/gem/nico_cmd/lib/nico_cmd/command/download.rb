@@ -11,32 +11,19 @@ module NicoCmd
     def download
       login unless @niconico
 
-      unless options[:dir] then
-        target_dir = "./"
-      else
-        target_dir = File.expand_path(options[:dir])
-      end
-
       options[:sm].each do | id |
 
         # 動画情報の取得
         video = @niconico.video(id)
 
+        # 保存先の取得
+        target_dir = get_target_dir(options[:dir])
+
         # 動画ファイルの保存
         open(File.join(target_dir, "#{id}.flv"), "w"){|f| f.write video.get_video }
 
         # 説明文の保存
-        if options[:html] then
-
-          open(File.join(target_dir, "#{id}.html"), "w") do |f|
-            f.write '<html lang="ja">'
-            f.write '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />'
-            f.write  %Q[<h1>#{video.title}</h1>]
-            f.write  %Q[<a href="#{video.url}">#{video.id}</a>]
-            f.write video.description
-            f.write '</html>'
-          end
-        end
+        build_ext_text(target_dir, video) if options[:html]
 
       end
 
@@ -51,8 +38,25 @@ module NicoCmd
       @niconico.login
     end
 
+    def get_target_dir(opt_dir)
+      unless opt_dir then
+        "./"
+      else
+        File.expand_path(opt_dir)
+      end
+    end
+
+    def build_ext_text(target_dir, video)
+      open(File.join(target_dir, "#{video.id}.html"), "w") do |f|
+        f.write '<html lang="ja">'
+        f.write '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />'
+        f.write  %Q[<h1>#{video.title}</h1>]
+        f.write  %Q[<a href="#{video.url}">#{video.id}</a>]
+        f.write video.description
+        f.write '</html>'
+      end
+    end
 
   end
-
 end
 
