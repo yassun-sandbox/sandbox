@@ -68,7 +68,7 @@ module NicoCmd
 
     def convert_mp3(flv_path)
       mp3_path = Pathname(flv_path).sub_ext(".mp3")
-      `ffmpeg -y -i #{flv_path} #{mp3_path}`
+      Open3.capture3("ffmpeg -y -i #{flv_path} #{mp3_path}")
     end
 
   end
