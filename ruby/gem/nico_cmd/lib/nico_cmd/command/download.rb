@@ -11,13 +11,13 @@ module NicoCmd
     def download
       login unless @niconico
 
+      # 保存先の取得
+      target_dir = get_target_dir(options[:dir])
+
       options[:sm].each do | id |
 
         # 動画情報の取得
         video = @niconico.video(id)
-
-        # 保存先の取得
-        target_dir = get_target_dir(options[:dir])
 
         # 動画ファイルの保存
         flv_path = dl_flv(target_dir, video)
