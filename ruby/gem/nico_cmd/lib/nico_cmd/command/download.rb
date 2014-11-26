@@ -25,6 +25,9 @@ module NicoCmd
         # 説明文の保存
         dl_ext_text(target_dir, video) if options[:html]
 
+        # MP3への変換
+        convert_mp3(flv_path) if options[:mp3]
+
       end
 
     end
@@ -61,6 +64,11 @@ module NicoCmd
       flv_path = File.join(target_dir, "#{video.id}.flv")
       open(flv_path, "w"){|f| f.write video.get_video }
       flv_path
+    end
+
+    def convert_mp3(flv_path)
+      mp3_path = Pathname(flv_path).sub_ext(".mp3")
+      `ffmpeg -y -i #{flv_path} #{mp3_path}`
     end
 
   end
