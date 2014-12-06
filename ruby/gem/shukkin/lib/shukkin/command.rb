@@ -7,12 +7,14 @@ module Shukkin
     desc 'shukkin', 'start'
     def shukkin
       login_info = get_login_info
+p login_info
+
     end
 
     private
 
     def get_login_info
-      yaml_path = File.expand_path(File.dirname(__FILE__)+"../../../../tuba.yml")
+      yaml_path = File.expand_path(File.dirname(__FILE__)+"../../../tuba.yml")
       YAML.load_file(yaml_path)
     end
 
