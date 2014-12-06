@@ -7,8 +7,6 @@ module Shukkin
     desc 'shukkin', 'start'
     def shukkin
       login_info = get_login_info
-p login_info
-
     end
 
     private
