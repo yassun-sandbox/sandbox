@@ -1,7 +1,6 @@
 # coding: utf-8
 require "thor"
-require 'yaml'
-require 'open3'
+require "mechanize"
 
 module Shukkin
   class Command < Thor
