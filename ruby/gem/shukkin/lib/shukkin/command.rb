@@ -7,6 +7,11 @@ module Shukkin
     desc 'shukkin', 'start'
     def shukkin
       login_info = get_login_info
+
+      agent = Mechanize.new
+      agent.get(login_info["url"]) do |page|
+      end
+
     end
 
     private
