@@ -14,11 +14,14 @@ module Shukkin
       agent.get(login_info["url"]) do |page|
 
         # ログイン
-        response = page.form_with(:action => '/auth/remotelogin') do |form|
+        page.form_with(:action => '/auth/remotelogin') do |form|
           form.field_with(:name => 'post[login]').value    = login_info["id"]
           form.field_with(:name => 'post[password]').value = login_info["pass"]
         end.click_button
+
       end
+
+      p agent.post(login_info["punch_in_url"],{},login_info["header"]);
 
     end
 
