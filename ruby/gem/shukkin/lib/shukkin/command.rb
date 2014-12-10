@@ -10,9 +10,14 @@ module Shukkin
       @agent = Mechanize.new
     end
 
-    desc 'kinmu', 'start'
-    def shukkin
+    desc 'start', 'punch in'
+    def start
       @agent.post(@site_info["punch_in_url"], {}, get_header);
+    end
+
+    desc 'end', 'punch out'
+    def end
+      @agent.post(@site_info["punch_out_url"], {}, get_header);
     end
 
     private
