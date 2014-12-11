@@ -41,7 +41,7 @@ module Shukkin
         csrf_hash  = { 'X-CSRF-Token' => csrf_token }
 
         # Cookie
-        cookie_hash = get_cookie_hash(@site_info["cookie"], @agent.cookie_jar.jar)
+        cookie_hash = get_cookie_hash(@agent.cookie_jar.jar)
 
         # 共通ヘッダー
         header = @site_info["header"]
@@ -54,10 +54,10 @@ module Shukkin
       end
     end
 
-    def get_cookie_hash(cookie_info, cookie_jar)
-        domain = cookie_info["domain"]
-        path   = cookie_info["path"]
-        name   = cookie_info["name"]
+    def get_cookie_hash(cookie_jar)
+        domain = @site_info["cookie"]["domain"]
+        path   = @site_info["cookie"]["path"]
+        name   = @site_info["cookie"]["name"]
 
         cookie_name = cookie_jar[domain][path][name].name
         cookie_val  = cookie_jar[domain][path][name].value
