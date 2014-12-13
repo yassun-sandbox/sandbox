@@ -1,6 +1,7 @@
 #! /bin/bash
 
-. ./path.conf
+SH_PATH=$(cd $(dirname $0);pwd)
+. ${SH_PATH}/path.conf
 
 if
 osascript -e '
