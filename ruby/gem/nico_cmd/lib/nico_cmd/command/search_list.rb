@@ -9,18 +9,13 @@ module NicoCmd
       agent = Mechanize.new
       page = agent.get(options[:url])
       page.links.each do | link |
-
         if %r(/watch/sm[\d]?) =~ link.href
-          puts " -------------- "
-          puts link.text
-          puts nico_id = link.href.scan(/sm[\d]+/)[0]
-          puts "http://nicovideo.jp/#{nico_id}"
-          puts " -------------- "
+          nico_id = link.href.scan(/sm[\d]+/)[0]
+          puts [nico_id, link.text, "http://nicovideo.jp/#{nico_id}"].join("\t")
         end
-
       end
-    end
 
+    end
   end
 end
 
