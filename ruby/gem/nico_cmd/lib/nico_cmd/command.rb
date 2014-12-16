@@ -5,6 +5,7 @@ require 'open3'
 require "niconico"
 require "nico_cmd/command/download"
 require "nico_cmd/command/search_list"
+require "nico_cmd/command/my_list"
 
 module NicoCmd
   class Command < Thor
