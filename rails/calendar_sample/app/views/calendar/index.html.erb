@@ -1,4 +1,9 @@
 <table>
+  <tr>
+    <% t('date.abbr_day_names').each do |day_name| %>
+      <td><%= day_name %></td>
+    <% end %>
+  </tr>
   <% @calendar_data.each do |date| %>
     <% if date.wday == 0 %><tr><% end %>
     <td>
