@@ -20,6 +20,7 @@
     <% else %>
       <%= link_to "サインイン", new_user_registration_path %> |
       <%= link_to "ログイン", new_user_session_path %>
+      <%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter) %>
     <% end %>
   </nav>
 </header>
