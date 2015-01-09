@@ -20,7 +20,8 @@ module NicoCmd
         video = @niconico.video(id)
 
         # 動画ファイルの保存
-        flv_path = dl_flv(target_dir, video)
+        file_name = options[:html] ? video.id : video.title
+        flv_path = dl_flv(target_dir, file_name, video)
 
         # 説明文の保存
         dl_ext_text(target_dir, video) if options[:html]
@@ -60,8 +61,8 @@ module NicoCmd
       end
     end
 
-    def dl_flv(target_dir, video)
-      flv_path = File.join(target_dir, "#{video.id}.flv")
+    def dl_flv(target_dir, file_name, video)
+      flv_path = File.join(target_dir, "#{file_name}.flv")
       open(flv_path, "w"){|f| f.write video.get_video }
       flv_path
     end
