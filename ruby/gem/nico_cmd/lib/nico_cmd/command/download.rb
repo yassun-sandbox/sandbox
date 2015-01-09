@@ -20,7 +20,7 @@ module NicoCmd
         video = @niconico.video(id)
 
         # 動画ファイルの保存
-        file_name = options[:html] ? video.id : video.title
+        file_name = options[:html] ? video.id : video.title.gsub(" ", "")
         flv_path = dl_flv(target_dir, file_name, video)
 
         # 説明文の保存
