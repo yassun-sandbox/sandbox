@@ -42,7 +42,14 @@
               }
 
             },
-            caldata : codropsEvents
+            // カレンダーデータ
+            caldata : codropsEvents,
+            // 日本語化
+            weeks : [ '日', '月', '火', '水', '木', '金', '土' ],
+            weekabbrs : [ '日', '月', '火', '水', '木', '金', '土' ],
+            months : [ '１月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月' ],
+            monthabbrs : [ '１月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月' ]
+
           } ),
           $month = $( '#custom-month' ).html( cal.getMonthName() ),
           $year = $( '#custom-year' ).html( cal.getYear() );
