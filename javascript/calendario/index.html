@@ -32,16 +32,16 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery.calendario.js"></script>
     <script type="text/javascript" src="js/data.js"></script>
-    <script type="text/javascript">  
+    <script type="text/javascript">
       $(function() {
         var cal = $( '#calendar' ).calendario( {
+            // クリックイベント
             onDayClick : function( $el, $contentEl, dateProperties ) {
-
               for( var key in dateProperties ) {
                 console.log( key + ' = ' + dateProperties[ key ] );
               }
-
             },
+
             // カレンダーデータ
             caldata : codropsEvents,
             // 日本語化
@@ -64,7 +64,7 @@
           cal.gotoNow( updateMonthYear );
         } );
 
-        function updateMonthYear() {        
+        function updateMonthYear() {
           $month.html( cal.getMonthName() );
           $year.html( cal.getYear() );
         }
