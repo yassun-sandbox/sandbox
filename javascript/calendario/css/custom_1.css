@@ -361,4 +361,37 @@ body {
 		font-size: 10px;
 		text-transform: uppercase;
 	}
+
 }
+
+
+.fc-calendar .fc-row:after {
+    content: ".";
+    display: block;
+    visibility: hidden;
+    height: 0.1px;
+    font-size: 0.1em;
+    line-height: 0;
+    clear: both;
+}
+
+.fc-five-rows .fc-row {
+  height: auto;
+  min-height: 20%;
+  overflow: hidden;
+}
+
+.fc-calendar .fc-row > div {
+    padding-bottom: 32768px;
+    margin-bottom: -32768px;
+}
+
+@media screen and (max-width: 880px) , screen and (max-height: 450px) {
+    .fc-calendar .fc-row > div {
+        padding-bottom: 10px;
+        margin-bottom: 0px;
+    }
+}
+
+
+
