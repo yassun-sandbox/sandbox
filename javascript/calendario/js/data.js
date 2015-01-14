@@ -17,6 +17,10 @@ var codropsEvents = {
 	'10-DD-YYYY' : [
 		{content : '<span>Ex: {\'10-DD-2014\' : {content : \'Something\', startDate : 10, endDate : 20}}</span>', startDate : 10, endDate : 20},
 		{content : '<span>Ex: {\'10-DD-2014\' : {content : \'Something\', endDate : 20}}</span>', endDate: 20},
-	]
-
+	],
+	'01-30-2015' : ['<span>hogehoge</span>','<span>hogehoge</span>','<span>hogehoge</span>','<span>hogehoge</span>','<span>hogehoge</span>','<span>hogehoge</span>'],
+	'01-31-2015' : ['<span>hogehoge</span>','<button type="button" ><font size="2">わいわい</font><font size="5">ボタン</font></button>']
 };
+
+
+
