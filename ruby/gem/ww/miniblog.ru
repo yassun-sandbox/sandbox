@@ -14,6 +14,7 @@ app = WW::SpyEye.to_app do
       {:message => "2つめの#{user}つぶやきです", :posted_on => (t + 10*60).iso8601},
     ].to_json
   end
+
 end
 
 run app
