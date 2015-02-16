@@ -2,11 +2,12 @@ require 'rubygems'
 require 'json'
 
 require 'ww'
+require 'ww/spy_eye'
 
 app = WW::SpyEye.to_app do
   min_offset = 0
 
-  get("/messages/:user.json") do |user|
+  spy.get("/messages/:user.json") do |user|
     content_type "application/json"
     t = Time.local(2010, 3, 13, 12, 34 + (min_offset += 1), 56)
     [
