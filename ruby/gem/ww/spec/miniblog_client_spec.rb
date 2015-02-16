@@ -25,4 +25,22 @@ describe MiniblogClient do
       TCPSocket.open('localhost', 3080).close
     }.should_not raise_exception(Errno::ECONNREFUSED)
   end
+
+  describe "#post_entry" do
+    before do
+      WW::Server.mock(:miniblog).post("/messages") do
+        ""
+      end
+      conn = Connection.new("localhost", 3080)
+      @client = MiniblogClient.new(conn)
+    end
+
+    after do
+      WW::Server.verify(:miniblog)
+    end
+
+    it "/messageにメッセージをPOSTすること" do
+      @client.post_entry("moro", "こんばんは")
+    end
+  end
 end
