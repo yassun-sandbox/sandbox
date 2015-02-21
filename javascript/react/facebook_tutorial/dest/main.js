@@ -1,10 +1,5 @@
 var converter = new Showdown.converter();
 
-var data = [
-  {author: "Pete Hunt", text: "This is one comment"},
-  {author: "Jordan Walke", text: "This is *another* comment"}
-];
-
 var Comment = React.createClass({displayName: "Comment",
   render: function() {
     var rawMarkUp = converter.makeHtml(this.props.children.toString())
@@ -59,7 +54,7 @@ var CommentBox = React.createClass({displayName: "CommentBox",
 });
 
 React.render(
-  React.createElement(CommentBox, {data: data}),
+  React.createElement(CommentBox, {url: "comments.json"}),
   document.getElementById('content')
 );
 
