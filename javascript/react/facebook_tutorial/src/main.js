@@ -42,8 +42,29 @@ var CommentForm = React.createClass({
 });
 
 var CommentBox = React.createClass({
+
+  loadCommentsFromServer: function() {
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
+
+  // コンポーネントの初期化
   getInitialState: function() {
     return {data: []};
+  },
+
+  // ComponentがDOMツリーに追加された状態で呼ばれる
+  componentDidMount: function() {
+    this.loadCommentsFromServer();
+    setInterval(this.loadCommentsFromServer, this.props.pollInterval);
   },
   render: function() {
     return (
@@ -57,7 +78,7 @@ var CommentBox = React.createClass({
 });
 
 React.render(
-  <CommentBox url="comments.json" />,
+  <CommentBox url="comments.json" pollInterval={2000} />,
   document.getElementById('content')
 );
 
