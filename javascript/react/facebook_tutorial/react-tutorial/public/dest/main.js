@@ -39,7 +39,8 @@ var CommentForm = React.createClass({displayName: "CommentForm",
     if (!text || !author) {
       return;
     }
-    // TODO: send request to the server
+
+    this.props.onCommentSubmit({author: author, text: text});
     this.refs.author.getDOMNode().value = '';
     this.refs.text.getDOMNode().value = '';
   },
@@ -69,8 +70,20 @@ var CommentBox = React.createClass({displayName: "CommentBox",
     });
   },
 
+  // Submit時のコールバック
   handleCommentSubmit: function(comment) {
-    // TODO: submit to the server and refresh the list
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      type: 'POST',
+      data: comment,
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
   },
 
   // コンポーネントの初期化
