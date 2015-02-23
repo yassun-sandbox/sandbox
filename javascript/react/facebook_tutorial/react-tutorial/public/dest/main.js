@@ -69,6 +69,10 @@ var CommentBox = React.createClass({displayName: "CommentBox",
     });
   },
 
+  handleCommentSubmit: function(comment) {
+    // TODO: submit to the server and refresh the list
+  },
+
   // コンポーネントの初期化
   getInitialState: function() {
     return {data: []};
@@ -79,12 +83,13 @@ var CommentBox = React.createClass({displayName: "CommentBox",
     this.loadCommentsFromServer();
     setInterval(this.loadCommentsFromServer, this.props.pollInterval);
   },
+
   render: function() {
     return (
       React.createElement("div", {className: "commentBox"}, 
         React.createElement("h1", null, "Comments"), 
         React.createElement(CommentList, {data: this.state.data}), 
-        React.createElement(CommentForm, null)
+        React.createElement(CommentForm, {onCommentSubmit: this.handleCommentSubmit})
       )
     );
   }
