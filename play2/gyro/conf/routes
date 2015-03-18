@@ -5,5 +5,9 @@
 # Home page
 GET     /                           controllers.Application.index
 
+# Sample Page
+GET     /sample1                    controllers.SampleController.sample1
+GET     /sample2                    controllers.SampleController.sample2
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
