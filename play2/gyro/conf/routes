@@ -9,5 +9,8 @@ GET     /                           controllers.Application.index
 GET     /sample1                    controllers.SampleController.sample1
 GET     /sample2                    controllers.SampleController.sample2
 
+GET     /sample5                    controllers.SampleController.sample5(fixedValue="fixed")
+GET     /sample6                    controllers.SampleController.sample6(defaultValue:Int ?= 1)
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
