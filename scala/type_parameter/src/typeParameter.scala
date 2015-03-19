@@ -4,15 +4,15 @@
 object typeParameter {
 
   def main (args: Array[String]): Unit = {
-    val x = new MySample[String]
+
+    /* 型パラメータ有りのクラス */
+    val x = new MySample1[String]
     x.set("hello1")
     println(x.get)
 
-    // 型パラメータ有りファンクション
-
+    /* 型パラメータ有りファンクション */
     // 型推論
     println(x.func("hello2"))
-
     // 型指定
     println(x.func[String]("hello3"))
     println(x.func[Int](4))
@@ -20,3 +20,4 @@ object typeParameter {
   }
 
 }
+
