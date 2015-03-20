@@ -6,5 +6,11 @@ object AbstractType {
     // 抽象型の呼出し
     val x = new Ex1
     x.show(new Foo)
+
+    val y = new Sample
+    y.func(new FileIO, "test.txt")
+    y.func(new DatabaseIO, "databaseUrl")
+
   }
+
 }
