@@ -3,6 +3,8 @@
  */
 object ImplicitConversion {
   def main(args: Array[String]) {
+
+    /* ImplicitConversion */
     val str:String = 10
     val strDate:String = new java.util.Date()
 
@@ -10,9 +12,18 @@ object ImplicitConversion {
     implicit val hello:String = "hello!"
     greeting("taro")
 
-    // view bound
+    /* view bound */
     // implicit yTox が存在するので変換引数に指定可能
     val a = new Z[Y]
+
+    /* 型パラメータの制約 */
+    val x_int = new X2[Int]
+    x_int.exec
+
+    // 宣言はできるが、Int型ではないのでコンパイルエラー
+    val x_string = new X2[String]
+    //x_string.exec
+
 
   }
 
