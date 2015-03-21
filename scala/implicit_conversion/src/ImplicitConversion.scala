@@ -10,6 +10,10 @@ object ImplicitConversion {
     implicit val hello:String = "hello!"
     greeting("taro")
 
+    // view bound
+    // implicit yTox が存在するので変換引数に指定可能
+    val a = new Z[Y]
+
   }
 
   // implicitキーワードは型エラー時に挿入される
@@ -34,5 +38,9 @@ object ImplicitConversion {
   def greeting(name:String)(implicit greet:String) = {
     println(greet + name)
   }
+
+  // view bound
+  implicit def yTox(y:Y):X = new X
+
 
 }
