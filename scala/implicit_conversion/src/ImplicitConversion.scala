@@ -6,6 +6,10 @@ object ImplicitConversion {
     val str:String = 10
     val strDate:String = new java.util.Date()
 
+    // implicit な変数を準備
+    implicit val hello:String = "hello!"
+    greeting("taro")
+
   }
 
   // implicitキーワードは型エラー時に挿入される
@@ -25,4 +29,10 @@ object ImplicitConversion {
   // 同じ型変換がある場合はエラーになる
   //implicit def dateToString2(date:java.util.Date):String = {
   //}
+
+  //implicit param
+  def greeting(name:String)(implicit greet:String) = {
+    println(greet + name)
+  }
+
 }
