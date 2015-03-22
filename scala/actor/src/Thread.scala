@@ -1,11 +1,24 @@
 /**
  * Created by ytaga on 2015/03/22.
  */
+import scala.actors.Actor
+import scala.actors.Actor._
+
 object Thread {
   def main(args: Array[String]) {
 
     /* Javaと同様にThreadクラスを使用するパターン */
     this.threadSampleCall
+
+    /* scalaのactorを使用するパターン */
+    val ma = new MyActor
+    ma.start()
+
+    // 直接作成するパターン
+    val ma2 = actor {
+      println("Hello MyActor for factory ")
+    }
+
   }
 
   def threadSampleCall {
@@ -24,5 +37,10 @@ class ThreadSample(name:String) extends Runnable {
       println(name + "count=" + i)
     }
   }
+}
 
+class MyActor extends Actor {
+  def act {
+    println("Hello MyActor")
+  }
 }
