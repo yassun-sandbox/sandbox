@@ -14,10 +14,26 @@ object Thread {
     val ma = new MyActor
     ma.start()
 
-    // 直接作成するパターン
+    // 直接actorを作成するパターン
     val ma2 = actor {
       println("Hello MyActor for factory ")
     }
+
+    // receiveブロック
+    val myActor = actor {
+
+      // Int型のメッセージ受信時にコンソールログを出力
+      val result = receive{
+        case i:Int =>
+          println("receive = " + i)
+          "int:" + i
+      }
+      println("result =" + result)
+
+    }
+    // メッセージの送信
+    myActor ! 1
+
 
   }
 
