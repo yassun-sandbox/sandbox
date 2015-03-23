@@ -10,6 +10,9 @@ object TraitSample {
     val p2 = new Person("taro") with ProjectManager
     p2.manage
 
+    // traitのインスタンス化
+    // 無名クラスを作成してミックスインされた状態
+    val p3 = new Programmer {}
 
   }
 
