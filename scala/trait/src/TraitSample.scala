@@ -17,6 +17,7 @@ object TraitSample {
 
 trait Programmer {
   def coding = println("コーディングします")
+  def write = println("コードを書きます")
 }
 
 class Person(val name:String) extends Programmer
@@ -27,4 +28,15 @@ trait ProjectManager {
   println("budget="+ budget)
 
   def manage = println("プロジェクト管理します")
+}
+
+
+trait  Writer {
+  def write = println("記事を書きます")
+}
+
+class Peson2 extends Programmer with Writer {
+  // superは指定する事も可能
+  override def write = super[Programmer].write
+
 }
