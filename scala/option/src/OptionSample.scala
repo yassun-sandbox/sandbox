@@ -20,6 +20,22 @@ object OptionSample {
     // 値が存在しないのでエラー
     //println(p3.get)
 
+    /* Optionのパターンマッチ */
+    def check(o: Option[String]) {
+      // ここでNoneが考慮されていない場合はコンパイル時にエラーがでる。
+      o match {
+        case Some(s) => println(s)
+        case None => println("Not exist.")
+      }
+    }
+
+    val some = map get (2)
+    val none = map get (4)
+
+    check(some)
+    check(none)
+
+
   }
 
 }
