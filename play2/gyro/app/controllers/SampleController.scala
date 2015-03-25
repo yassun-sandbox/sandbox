@@ -26,4 +26,14 @@ object SampleController extends Controller{
     Ok(views.html.index("defaultValue:"+ defaultValue))
   }
 
+  // 引数でOption型を使用する。
+  def sample7(optValue:Option[String]) = Action {
+    println("optValue:" + optValue)
+    val res = optValue match {
+      case Some(opt) => opt
+      case None => "nothing"
+    }
+    Ok(views.html.index("optValue:" + res))
+  }
+
 }
