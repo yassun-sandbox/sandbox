@@ -1,0 +1,9 @@
+@(message:String, userList:List[String])
+@main("show scala templates"){
+  <h1>@message</h1>
+  <ul>
+      @for(user <- userList){
+        <li><p>@user</p></li>
+      }
+  </ul>
+}

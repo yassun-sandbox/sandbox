@@ -14,6 +14,9 @@ GET     /sample6                    controllers.SampleController.sample6(default
 
 GET     /sample7                    controllers.SampleController.sample7(optValue:Option[String])
 
+GET     /show                       controllers.TemplateController.show()
+
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
