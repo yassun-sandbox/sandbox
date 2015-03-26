@@ -13,7 +13,7 @@ object SampleController extends Controller{
   }
 
   def sample2 = Action {
-    Ok(views.html.index("Sample Controller#sample2"))
+    Redirect(routes.SampleController.sample1)
   }
 
   def sample5(fixedValue: String) = Action {
