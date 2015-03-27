@@ -16,6 +16,9 @@ GET     /sample7                    controllers.SampleController.sample7(optValu
 
 GET     /show                       controllers.TemplateController.show()
 
+GET     /user/entry                 controllers.UserController.entryInit
+POST    /user/entry                 controllers.UserController.entrySubmit
+
 
 
 # Map static resources from the /public folder to the /assets URL path
