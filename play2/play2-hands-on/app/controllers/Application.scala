@@ -3,13 +3,23 @@ package controllers
 import play.api._
 import play.api.mvc._
 
+import play.api.db.slick._
+import models.Tables._
+import profile.simple._
 
 object UserController extends Controller {
 
   /**
    * 一覧表示
    */
-  def list = TODO
+  def list = DBAction { implicit rs =>
+
+    // ユーザをIDの昇順でソートして取得
+    val users = Users.sortBy(t => t.id).list
+
+    // テンプレートをレンダリングしてレスポンスを返却
+    Ok(views.html.user.list(users))
+  }
 
   /**
    * 登録・編集画面表示
