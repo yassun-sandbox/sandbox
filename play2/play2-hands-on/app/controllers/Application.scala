@@ -7,7 +7,22 @@ import play.api.db.slick._
 import models.Tables._
 import profile.simple._
 
+import play.api.data._
+import play.api.data.Forms._
+
 object UserController extends Controller {
+
+  // フォームの値を格納する
+  case class UserForm(id: Option[Long], name: String, companyId: Option[Int])
+
+  // formのデータ⇔ケースクラスの変換を行う
+  val userForm = Form(
+    mapping(
+      "id"        -> optional(longNumber),
+      "name"      -> nonEmptyText(maxLength = 20),
+      "companyId" -> optional(number)
+    )(UserForm.apply)(UserForm.unapply)
+  )
 
   /**
    * 一覧表示
