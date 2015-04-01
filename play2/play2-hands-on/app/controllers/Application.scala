@@ -39,7 +39,28 @@ object UserController extends Controller {
   /**
    * 登録・編集画面表示
    */
-  def edit(id: Option[Long]) = TODO
+  def edit(id: Option[Long]) = DBAction { implicit rs =>
+    // リクエストパラメータにIDが存在する場合
+    val form = if(id.isDefined) {
+
+      // IDからユーザ情報を1件取得
+      val user = Users.filter(_.id === id.get.bind).first
+
+      // 値をフォームに詰める
+      userForm.fill(UserForm(Some(user.id), user.name, user.companyId))
+
+    } else {
+
+      // リクエストパラメータにIDが存在しない場合
+      userForm
+
+    }
+
+    // 会社一覧を取得
+    val companies = Companies.sortBy(t => t.id).list
+
+    Ok(views.html.user.edit(form, companies))
+  }
 
   /**
    * 登録実行
