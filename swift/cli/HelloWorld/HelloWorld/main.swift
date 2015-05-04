@@ -10,3 +10,9 @@ import Foundation
 
 println("Hello, World!")
 
+var myAge = 30
+var newAge = myAge++
+
+println("myAge: \(myAge)")
+println("newAge: \(newAge)")
+
