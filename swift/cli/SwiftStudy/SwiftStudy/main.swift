@@ -16,3 +16,9 @@ var num:Int? = 5
 // アンラップ
 var sum = num! + 5
 
+
+// 配列
+var names = ["hoge","huga","hega"]
+
+// 辞書
+var customers = [10: "HOGE",11: "HUGA",12:"HEGA"]
