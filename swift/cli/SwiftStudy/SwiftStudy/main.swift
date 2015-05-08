@@ -24,7 +24,7 @@ var names = ["hoge","huga","hega"]
 var customers = [10: "HOGE",11: "HUGA",12:"HEGA"]
 
 // 外部引数
-func stdWeight(heightCm height: Double, #bmi: Double) -> Double{
+func stdWeight(heightCm height: Double, bmi: Double = 22.0) -> Double{
     var heightM = height / 100.0
     return heightM * heightM * bmi
 }
