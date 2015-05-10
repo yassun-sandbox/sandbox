@@ -25,3 +25,10 @@ func cmToInch(var cm: Double) -> Double {
     return cm
 }
 
+// 引数の参照渡し
+func squaredNumber(inout num:Int){
+    num = num * num
+}
+var aNum = 4
+squaredNumber(&aNum)
+println(aNum)
