@@ -60,10 +60,16 @@ var myKuji = fortune(true)
 for _ in 1...10 {
     println(myKuji())
 }
+
 myKuji = fortune(false)
 for _ in 1...10 {
     println(myKuji())
 }
 
+// 関数を受け取る関数
+func omikujiForUs(kuji: () -> String) {
+    kuji()
+}
 
+omikujiForUs(myKuji)
 
