@@ -21,3 +21,9 @@ counter1()
 counter2()
 counter2()
 counter2()
+
+// クロージャー式
+var array = [1, 3, 10, 12, 100, 99, 101]
+var newArray = array.filter({ num in num % 3 == 0 })
+println(newArray)
+
