@@ -14,3 +14,6 @@ numbers.sort(myFun)
 // クロージャで代用
 numbers.sort({$0 > $1})
 
+// Filter Sample
+let files = ["index.html","secret.txt","sample.html","main.swift"]
+let htmlFiles = files.filter({$0.hasSuffix(".html")})
