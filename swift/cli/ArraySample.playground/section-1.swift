@@ -17,3 +17,8 @@ numbers.sort({$0 > $1})
 // Filter Sample
 let files = ["index.html","secret.txt","sample.html","main.swift"]
 let htmlFiles = files.filter({$0.hasSuffix(".html")})
+
+// Map Sample
+let inchArray = [2.0, 3.5, 1.0, 5.3]
+let cmArray   = inchArray.map{$0 * 2.54}
+
