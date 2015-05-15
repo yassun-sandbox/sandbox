@@ -19,7 +19,24 @@ class TShirt {
     
     // コンビニエンス・イニシャライザB
     convenience init(size:String){
-        self.init(neck: 1, size: "M")
+        self.init(neck: 1, size: size)
     }
     
 }
+
+// イニシャライザの指定なし
+class ColoredTShirt: TShirt {
+    var color: String = "white"
+}
+
+let ct1 = ColoredTShirt(neck: 2, size: "L")
+ct1.neck
+ct1.size
+
+let ct2 = ColoredTShirt(neck: 2)
+ct2.neck
+ct2.size
+
+let ct3 = ColoredTShirt(size: "L")
+ct3.neck
+ct3.size
