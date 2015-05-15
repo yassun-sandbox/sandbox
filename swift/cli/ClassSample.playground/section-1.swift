@@ -24,19 +24,33 @@ class TShirt {
     
 }
 
-// イニシャライザの指定なし
 class ColoredTShirt: TShirt {
     var color: String = "white"
+    
+    init(neck: Int, size: String, color: String){
+        self.color = color
+        super.init(neck: neck, size: size)
+    }
+    
+    override init(neck: Int, size: String){
+        self.color = "white"
+        super.init(neck: neck, size: size)
+    }
+    
 }
 
-let ct1 = ColoredTShirt(neck: 2, size: "L")
+let ct1 = ColoredTShirt(neck: 2, size: "L",color: "green")
 ct1.neck
 ct1.size
+ct1.color
 
 let ct2 = ColoredTShirt(neck: 2)
 ct2.neck
 ct2.size
+ct2.color
+
 
 let ct3 = ColoredTShirt(size: "L")
 ct3.neck
 ct3.size
+ct3.color
