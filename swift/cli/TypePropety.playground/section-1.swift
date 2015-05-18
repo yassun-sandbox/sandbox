@@ -12,3 +12,14 @@ class myCalc {
     }
 }
 
+// ストアド・プロパティ
+struct Greeting {
+    static var greeting = "こんにちは"
+    static var niceToSeeYou: String {
+        return "初めまして" + greeting
+    }
+}
+
+Greeting.greeting
+Greeting.niceToSeeYou
+
