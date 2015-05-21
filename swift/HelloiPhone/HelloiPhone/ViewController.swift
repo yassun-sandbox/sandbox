@@ -10,9 +10,32 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    // ラベル
+    @IBOutlet weak var myLabel: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        // 日本のロケールを設定
+        let jaLocale = NSLocale(localeIdentifier: "ja_JP")
+        
+        // 日本のフォーマット
+        let fmt = NSDateFormatter()
+        fmt.locale = jaLocale
+        
+        // 時間はなし
+        fmt.timeStyle = .NoStyle
+        
+        // 日付はロングスタイル
+        fmt.dateStyle = .LongStyle
+        
+        // 現在時刻
+        var now = NSDate()
+        
+        // ラベルに日付を表示する
+        self.myLabel.text = fmt.stringFromDate(now)
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
