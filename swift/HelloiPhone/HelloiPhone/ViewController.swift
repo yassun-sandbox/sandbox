@@ -12,6 +12,19 @@ class ViewController: UIViewController {
 
     // ラベル
     @IBOutlet weak var myLabel: UILabel!
+    
+    @IBAction func buttonPressed(sender: AnyObject) {
+        
+        // 日付のフォーマットを指定
+        let fmt = NSDateFormatter()
+        fmt.locale = NSLocale(localeIdentifier: "ja_JP")
+        fmt.timeStyle = .FullStyle
+        fmt.dateStyle = .NoStyle
+        
+        var now = NSDate()
+        self.myLabel.text = fmt.stringFromDate(now)
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
