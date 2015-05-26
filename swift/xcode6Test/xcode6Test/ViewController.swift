@@ -9,6 +9,11 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet weak var myLabel: UILabel!
+    
+    @IBAction func myButton(sender: AnyObject) {
+       myLabel.text = "hogehoge"
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
