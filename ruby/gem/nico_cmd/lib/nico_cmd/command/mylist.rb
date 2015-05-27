@@ -14,6 +14,7 @@ module NicoCmd
 
       @niconico.mylist(options[:mylist_id]).each do | video |
         file_name = video.title.gsub(" ", "")
+        file_name.gsub!("/", "")
         puts file_name
 
         # ファイルの保存
