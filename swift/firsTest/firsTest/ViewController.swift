@@ -10,10 +10,14 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var myLabel: UILabel!
-    @IBAction func mySwitch(sender: AnyObject) {
-      myLabel.text="huga"
+    @IBAction func changeSwitch(sender: UISwitch) {
+        if sender.on == true{
+            myLabel.text = "ON"
+        }else{
+            myLabel.text = "OFF"
+        }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
