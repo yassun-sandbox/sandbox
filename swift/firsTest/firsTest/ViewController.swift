@@ -10,6 +10,9 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var myLabel: UILabel!
+    @IBAction func mySwitch(sender: AnyObject) {
+      myLabel.text="huga"
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
