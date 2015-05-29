@@ -8,7 +8,8 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+    
     @IBOutlet weak var myLabel: UILabel!
     @IBAction func changeSwitch(sender: UISwitch) {
         if sender.on == true{
@@ -18,18 +19,42 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var myPicker: UIPickerView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         myLabel.text = "Hi!!!!"
+        myPicker.dataSource = self
+        myPicker.delegate = self
     }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    }
+    
+    // UIPickerViewDataSource Delegate
+    var tea_list = ["お茶","抹茶","紅茶","緑茶"]
+    
+    // 列数
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    // 行数
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return tea_list.count
+
     }
 
+    // 表示文言
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        return tea_list[row]
+    }
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        myLabel.text = "選択されたのは\(row)行目で\(tea_list[row])です。"
+    }
 
+    
+
+    
 }
 
