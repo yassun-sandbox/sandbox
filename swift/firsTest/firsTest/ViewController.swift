@@ -8,7 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIWebViewDelegate {
+    
+    @IBOutlet weak var myWebview: UIWebView!
     
     @IBOutlet weak var myLabel: UILabel!
     @IBAction func changeSwitch(sender: UISwitch) {
@@ -26,11 +28,29 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         myLabel.text = "Hi!!!!"
         myPicker.dataSource = self
         myPicker.delegate = self
+        
+        // WebView
+        myWebview.delegate = self
+        
+        // URLリクエストの作成
+        var myURL = NSURL(string: "http://www.sttend.com")
+        var myURLReq = NSURLRequest(URL:myURL!)
+        myWebview.loadRequest(myURLReq)
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    // WebView Delegate
+    func webViewDidStartLoad(webView: UIWebView) {
+       UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    }
+    
+    func webViewDidFinishLoad(webView: UIWebView) {
+          UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    }
+    
     
     // UIPickerViewDataSource Delegate
     var tea_list = ["お茶","抹茶","紅茶","緑茶"]
