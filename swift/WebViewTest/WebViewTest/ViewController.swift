@@ -8,11 +8,25 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIWebViewDelegate {
+    @IBOutlet weak var myWebView: UIWebView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        myWebView.delegate = self
+        
+        var myURL = NSURL(string: "http://www.sttend.com/")
+        var myURLReq = NSURLRequest(URL: myURL!)
+        
+        myWebView.loadRequest(myURLReq)
+    }
+    
+    func webViewDidStartLoad(webView: UIWebView) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    }
+    func webViewDidFinishLoad(webView: UIWebView) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
     }
 
     override func didReceiveMemoryWarning() {
