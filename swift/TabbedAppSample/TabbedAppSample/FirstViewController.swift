@@ -19,7 +19,16 @@ class FirstViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // 画面が表示された場合
+    override func viewWillAppear(animate: Bool) {
 
+        // AppDelegateの取得
+        var myAp = UIApplication.sharedApplication().delegate as AppDelegate
+        myAp.myCount++
+
+        println("1画面目 count=\(myAp.myCount)")
+    }
 
 }
 
