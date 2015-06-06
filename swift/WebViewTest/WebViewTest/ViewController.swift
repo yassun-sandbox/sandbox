@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet weak var myWebView: UIWebView!
+    @IBOutlet weak var homeTabButton: UITabBarItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()

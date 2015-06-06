@@ -48,6 +48,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="homeTabButton" destination="6Pn-FY-Tzq" id="6XX-Rg-lUr"/>
                         <outlet property="myWebView" destination="ES2-0P-mAL" id="xNO-lb-Avb"/>
                     </connections>
                 </viewController>
