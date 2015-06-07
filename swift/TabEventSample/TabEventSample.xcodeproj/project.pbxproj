@@ -14,6 +14,8 @@
 		79BF5BB11B241C2E009833A4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79BF5BB01B241C2E009833A4 /* Images.xcassets */; };
 		79BF5BB41B241C2E009833A4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79BF5BB21B241C2E009833A4 /* LaunchScreen.xib */; };
 		79BF5BC01B241C2E009833A4 /* TabEventSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BF5BBF1B241C2E009833A4 /* TabEventSampleTests.swift */; };
+		79BF5BCA1B241DB3009833A4 /* TabBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BF5BC91B241DB3009833A4 /* TabBarDelegate.swift */; };
+		79BF5BCC1B241E36009833A4 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BF5BCB1B241E36009833A4 /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,8 @@
 		79BF5BB91B241C2E009833A4 /* TabEventSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TabEventSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		79BF5BBE1B241C2E009833A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79BF5BBF1B241C2E009833A4 /* TabEventSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabEventSampleTests.swift; sourceTree = "<group>"; };
+		79BF5BC91B241DB3009833A4 /* TabBarDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabBarDelegate.swift; path = ../TabBarDelegate.swift; sourceTree = "<group>"; };
+		79BF5BCB1B241E36009833A4 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,8 @@
 		79BF5BA41B241C2D009833A4 /* TabEventSample */ = {
 			isa = PBXGroup;
 			children = (
+				79BF5BCB1B241E36009833A4 /* TabBarController.swift */,
+				79BF5BC91B241DB3009833A4 /* TabBarDelegate.swift */,
 				79BF5BA71B241C2E009833A4 /* AppDelegate.swift */,
 				79BF5BA91B241C2E009833A4 /* FirstViewController.swift */,
 				79BF5BAB1B241C2E009833A4 /* SecondViewController.swift */,
@@ -217,6 +223,8 @@
 			files = (
 				79BF5BAC1B241C2E009833A4 /* SecondViewController.swift in Sources */,
 				79BF5BA81B241C2E009833A4 /* AppDelegate.swift in Sources */,
+				79BF5BCA1B241DB3009833A4 /* TabBarDelegate.swift in Sources */,
+				79BF5BCC1B241E36009833A4 /* TabBarController.swift in Sources */,
 				79BF5BAA1B241C2E009833A4 /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
