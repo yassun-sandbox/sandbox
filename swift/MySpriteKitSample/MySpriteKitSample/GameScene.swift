@@ -11,7 +11,11 @@ import SpriteKit
 class GameScene: SKScene {
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-        
+        var mySprite = SKSpriteNode(imageNamed:"iOsrobots.png")
+        mySprite.position = CGPoint(x: 360, y:500)
+        addChild(mySprite)
+        var action = SKAction.rotateToAngle(CGFloat(45 * M_PI), duration: 1)
+        mySprite.runAction(action)
 
     }
     
