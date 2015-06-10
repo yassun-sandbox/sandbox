@@ -15,6 +15,7 @@
 		799443311B212FF40047B227 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 799443301B212FF40047B227 /* Images.xcassets */; };
 		799443341B212FF40047B227 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 799443321B212FF40047B227 /* LaunchScreen.xib */; };
 		799443401B212FF40047B227 /* MySpriteKitSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7994433F1B212FF40047B227 /* MySpriteKitSampleTests.swift */; };
+		79DBC2991B27BECD0057ECFE /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 79DBC2981B27BECD0057ECFE /* logo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		799443391B212FF40047B227 /* MySpriteKitSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MySpriteKitSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7994433E1B212FF40047B227 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7994433F1B212FF40047B227 /* MySpriteKitSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySpriteKitSampleTests.swift; sourceTree = "<group>"; };
+		79DBC2981B27BECD0057ECFE /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = "../../../../../Desktop/テスト画像/logo.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 		799443221B212FF40047B227 /* MySpriteKitSample */ = {
 			isa = PBXGroup;
 			children = (
+				79DBC2981B27BECD0057ECFE /* logo.png */,
 				799443251B212FF40047B227 /* AppDelegate.swift */,
 				799443271B212FF40047B227 /* GameScene.sks */,
 				799443291B212FF40047B227 /* GameScene.swift */,
@@ -199,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				799443341B212FF40047B227 /* LaunchScreen.xib in Resources */,
+				79DBC2991B27BECD0057ECFE /* logo.png in Resources */,
 				799443311B212FF40047B227 /* Images.xcassets in Resources */,
 				799443281B212FF40047B227 /* GameScene.sks in Resources */,
 				7994432F1B212FF40047B227 /* Main.storyboard in Resources */,
@@ -413,6 +417,7 @@
 				799443451B212FF40047B227 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		799443461B212FF40047B227 /* Build configuration list for PBXNativeTarget "MySpriteKitSampleTests" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +426,7 @@
 				799443481B212FF40047B227 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
