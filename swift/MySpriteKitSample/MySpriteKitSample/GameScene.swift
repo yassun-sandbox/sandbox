@@ -10,12 +10,17 @@ import SpriteKit
 
 class GameScene: SKScene {
     override func didMoveToView(view: SKView) {
-        /* Setup your scene here */
         var mySprite = SKSpriteNode(imageNamed:"logo.png")
         mySprite.position = CGPoint(x: 360, y:500)
         addChild(mySprite)
         var action = SKAction.rotateToAngle(CGFloat(45 * M_PI), duration: 1)
         mySprite.runAction(action)
+        
+        var mySpriteScale = SKSpriteNode(imageNamed:"logo.png")
+        mySpriteScale.position = CGPoint(x: 100, y:250)
+        addChild(mySpriteScale)
+        var scaleAction = SKAction.scaleTo(3, duration: 1)
+        mySpriteScale.runAction(scaleAction)
 
     }
     
