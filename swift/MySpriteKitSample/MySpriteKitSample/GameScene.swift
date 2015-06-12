@@ -21,6 +21,13 @@ class GameScene: SKScene {
         addChild(mySpriteScale)
         var scaleAction = SKAction.scaleTo(3, duration: 1)
         mySpriteScale.runAction(scaleAction)
+        
+        var mySpriteMove = SKSpriteNode(imageNamed:"logo.png")
+        mySpriteMove.position = CGPoint(x:100, y:100)
+        addChild(mySpriteMove)
+        var moveAction = SKAction.moveTo(CGPoint(x: 400, y:600), duration: 3)
+        moveAction.timingMode = SKActionTimingMode.EaseOut
+        mySpriteMove.runAction(moveAction)
 
     }
     
