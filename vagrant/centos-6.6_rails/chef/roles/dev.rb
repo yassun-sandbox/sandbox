@@ -8,4 +8,5 @@ run_list(
   "recipe[base::locale]",
   "recipe[base::selinux]",
   "recipe[base::history]",
+  "recipe[git]",
 )
