@@ -1,0 +1,5 @@
+export RBENV_ROOT="<%= ENV['RBENV_ROOT'] %>"
+export PATH="${RBENV_ROOT}/bin:${PATH}"
+export RUBY_BUILD_CACHE_PATH="<%= ENV['RUBY_BUILD_CACHE_PATH'] %>"
+
+eval "$(rbenv init --no-rehash -)"

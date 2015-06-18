@@ -9,4 +9,6 @@ run_list(
   "recipe[base::selinux]",
   "recipe[base::history]",
   "recipe[git]",
+  "recipe[ruby::rbenv]",
+  "recipe[ruby::ruby]",
 )
