@@ -12,4 +12,5 @@ run_list(
   "recipe[git]",
   "recipe[ruby::rbenv]",
   "recipe[ruby::ruby]",
+  "recipe[mysql]",
 )
