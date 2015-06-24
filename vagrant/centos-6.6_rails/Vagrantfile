@@ -24,4 +24,23 @@ Vagrant.configure(2) do |config|
     end
   end
 
+  # CI環境 (Docker)
+  config.vm.define :ci_docker, autostart: false do |ci_docker|
+
+    # Docker
+    ci_docker.vm.provider :docker do |docker|
+      docker.build_dir = 'ci'
+      docker.has_ssh = true
+      docker.remains_running = false
+    end
+
+    # Chef
+    ci_docker.vm.provision :chef_zero do |chef|
+      chef.cookbooks_path = 'chef/cookbooks'
+      chef.roles_path = 'chef/roles'
+      chef.add_role 'ci_docker'
+    end
+
+  end
+
 end
