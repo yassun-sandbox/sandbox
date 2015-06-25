@@ -166,11 +166,9 @@ func getSecurityGroupId(instanceId string) (securityGroupId string, err error) {
 
 func getSshKey(tagName string) (sshKeyPath string, err error) {
 
-	rf, err := ioutil.ReadFile("./config.json")
-	js, err := simplejson.NewJson(rf)
-
-	bucket := js.GetPath(tagName, "bucket").MustString()
-	key := js.GetPath(tagName, "key").MustString()
+	sshConfig := readConfig(tagName)
+	bucket := sshConfig.bucket
+	key := sshConfig.key
 
 	s3manager := s3manager.NewDownloader(&s3manager.DownloadOptions{S3: s3.New(&aws.Config{Region: "ap-northeast-1"})})
 
