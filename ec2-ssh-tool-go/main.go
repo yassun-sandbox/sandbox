@@ -13,13 +13,24 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"sort"
 	"strconv"
 )
 
 type Ec2Instance struct {
-	instanceId, ip, tagName string
+	tagName, instanceID, instanceType, availabilityZone, ip, stageName string
 }
 type Ec2Instances []Ec2Instance
+
+func (e Ec2Instances) Less(i, j int) bool {
+	return e[i].tagName < e[j].tagName
+}
+func (e Ec2Instances) Len() int {
+	return len(e)
+}
+func (e Ec2Instances) Swap(i, j int) {
+	e[i], e[j] = e[j], e[i]
+}
 
 func main() {
 
@@ -39,7 +50,7 @@ func main() {
 	}
 
 	// セキュリティグループIDの取得
-	securityGroupId, err := getSecurityGroupId(ec2Instance.instanceId)
+	securityGroupId, err := getSecurityGroupId(ec2Instance.instanceID)
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -98,32 +109,38 @@ func selectEc2Instance() (ec2Instance Ec2Instance, err error) {
 	}
 
 	ec2instances := Ec2Instances{}
-	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader([]string{"No", "Tag Name", "Instance Id", "Instance Type", "AZ", "IP", "Status"})
-	ec2No := 0
 	for _, r := range res.Reservations {
 		for _, i := range r.Instances {
 			if *i.State.Name != "running" {
 				continue
 			}
 			var tagName string
+			var stageName string
 			for _, t := range i.Tags {
 				if *t.Key == "Name" {
 					tagName = *t.Value
 				}
+				if *t.Key == "Stage" {
+					stageName = *t.Value
+				}
 			}
-			table.Append([]string{
-				strconv.Itoa(ec2No),
-				tagName,
-				*i.InstanceID,
-				*i.InstanceType,
-				*i.Placement.AvailabilityZone,
-				*i.PublicIPAddress,
-				*i.State.Name,
-			})
-			ec2instances = append(ec2instances, Ec2Instance{instanceId: *i.InstanceID, ip: *i.PublicIPAddress, tagName: tagName})
-			ec2No = ec2No + 1
+			ec2instances = append(ec2instances, Ec2Instance{tagName: tagName, instanceID: *i.InstanceID, instanceType: *i.InstanceType, availabilityZone: *i.Placement.AvailabilityZone, ip: *i.PublicIPAddress, stageName: stageName})
 		}
+	}
+
+	table := tablewriter.NewWriter(os.Stdout)
+	table.SetHeader([]string{"No", "Tag Name", "Stage", "Instance Id", "Instance Type", "AZ", "IP"})
+	sort.Sort(ec2instances)
+	for i, ec2instance := range ec2instances {
+		table.Append([]string{
+			strconv.Itoa(i),
+			ec2instance.tagName,
+			ec2instance.stageName,
+			ec2instance.instanceID,
+			ec2instance.instanceType,
+			ec2instance.availabilityZone,
+			ec2instance.ip,
+		})
 	}
 	table.Render()
 
