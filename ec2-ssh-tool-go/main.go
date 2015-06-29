@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/ec2"
@@ -33,7 +34,19 @@ func (e Ec2Instances) Swap(i, j int) {
 }
 
 func main() {
+	sshStartFlag := flag.Bool("s", false, "SSH Start")
+	sshEndFlag := flag.Bool("e", false, "SSH End")
+	flag.Parse()
+	if *sshStartFlag {
+		startSSH()
+	} else if *sshEndFlag {
+		endSSH()
+	} else {
+		flag.PrintDefaults()
+	}
+}
 
+func startSSH() {
 	// グローバルIPの取得
 	globalIp, err := getGlobalIp()
 	if err != nil {
@@ -227,4 +240,7 @@ func addSecurityGroup(globalIp string, securityGroupId string) (err error) {
 	}
 	_, err = svc.AuthorizeSecurityGroupIngress(sec_params)
 	return err
+}
+
+func endSSH() {
 }
