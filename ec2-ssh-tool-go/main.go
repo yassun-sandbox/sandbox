@@ -73,6 +73,12 @@ func main() {
 	// 入力待ち
 	waitExitEnter()
 
+	// セキュリティグループの削除
+	delSecurityGroup(securityGroupId)
+
+	// SSHKeyの削除
+	delSshKey(sshKeyPath)
+
 }
 
 func getGlobalIp() (ip string, err error) {
@@ -229,5 +235,33 @@ func addSecurityGroup(globalIp string, securityGroupId string) (err error) {
 		FromPort:   aws.Long(22),
 	}
 	_, err = svc.AuthorizeSecurityGroupIngress(sec_params)
+	return err
+}
+func waitExitEnter() {
+	var input string
+	fmt.Print("Exit Enter Any Key > ")
+	fmt.Scanln(&input)
+}
+
+func delSecurityGroup(securityGroupId string) (err error) {
+	var input string
+	fmt.Print("Delete SecurityGroupID? [Y/N] > ")
+	fmt.Scanln(&input)
+	if input == "Y" || input == "y" {
+		fmt.Println("Deleted SecurityGroupID.")
+	}
+
+	return err
+}
+
+func delSshKey(sshKeyPath string) (err error) {
+	var input string
+
+	fmt.Print("Delete SSH KEY? [Y/N] > ")
+	fmt.Scanln(&input)
+	if input == "Y" || input == "y" {
+		fmt.Println("Deleted SSH KEY.")
+	}
+
 	return err
 }
