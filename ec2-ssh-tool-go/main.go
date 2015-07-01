@@ -260,6 +260,7 @@ func delSshKey(sshKeyPath string) (err error) {
 	fmt.Print("Delete SSH KEY? [Y/N] > ")
 	fmt.Scanln(&input)
 	if input == "Y" || input == "y" {
+		os.Remove(sshKeyPath)
 		fmt.Println("Deleted SSH KEY.")
 	}
 
