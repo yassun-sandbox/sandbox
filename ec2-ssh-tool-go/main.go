@@ -74,7 +74,7 @@ func main() {
 	waitExitEnter()
 
 	// セキュリティグループの削除
-	delSecurityGroup(securityGroupId)
+	delSecurityGroup(securityGroupId, globalIp)
 
 	// SSHKeyの削除
 	delSshKey(sshKeyPath)
@@ -243,11 +243,22 @@ func waitExitEnter() {
 	fmt.Scanln(&input)
 }
 
-func delSecurityGroup(securityGroupId string) (err error) {
+func delSecurityGroup(securityGroupId string, globalIp string) (err error) {
+
 	var input string
 	fmt.Print("Delete SecurityGroupID? [Y/N] > ")
 	fmt.Scanln(&input)
 	if input == "Y" || input == "y" {
+		svc := ec2.New(&aws.Config{Region: "ap-northeast-1"})
+		sec_params := &ec2.RevokeSecurityGroupIngressInput{
+			CIDRIP:     aws.String(globalIp + "/32"),
+			GroupID:    aws.String(securityGroupId),
+			IPProtocol: aws.String("tcp"),
+			ToPort:     aws.Long(22),
+			FromPort:   aws.Long(22),
+		}
+		_, err = svc.RevokeSecurityGroupIngress(sec_params)
+
 		fmt.Println("Deleted SecurityGroupID.")
 	}
 
