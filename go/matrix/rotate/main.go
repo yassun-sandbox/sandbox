@@ -1,7 +1,8 @@
 package main
 
 import (
-	"github.com/k0kubun/pp"
+//	"github.com/k0kubun/pp"
+//	"fmt"
 )
 
 func String2Runes(strings []string) [][]rune {
@@ -17,16 +18,21 @@ func String2Runes(strings []string) [][]rune {
 }
 
 func main() {
+	s := []string{"あいう", "かきく", "さしす"}
+	sRunes := String2Runes(s)
+	rotate(sRunes)
+}
+
+func rotate(stringRune [][]rune) {
 	runes := make([][]rune, 4)
 	for i := range runes {
 		runes[i] = make([]rune, 3)
 	}
 
-	s := []string{"あいう", "かきく", "さしす"}
-	sRunes := String2Runes(s)
-
-	for i := range sRunes {
-		pp.Println(string(sRunes[i]))
+	for x, _ := range stringRune[0] {
+		for y, _ := range stringRune {
+			runes[x][y] = stringRune[y][x]
+		}
 	}
 
 }
