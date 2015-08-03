@@ -8,9 +8,13 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"sync"
+	"time"
 )
 
 func GetPage(url string) {
+	fmt.Println(url)
+
 	i := 1
 	filepath := fmt.Sprintf("%x", md5.Sum([]byte(url)))
 
@@ -23,9 +27,22 @@ func GetPage(url string) {
 	})
 }
 
+func GoGet(urls []string) {
+	var wg sync.WaitGroup
+	for _, url := range urls {
+		time.Sleep(100 * time.Millisecond)
+		wg.Add(1)
+		go func(url string) {
+			defer wg.Done()
+			GetPage(url)
+		}(url)
+	}
+	wg.Wait()
+}
+
 func main() {
-	url := ""
-	GetPage(url)
+	urls := []string{}
+	GoGet(urls)
 }
 
 func dl(url string, filepath string, filename string) {
