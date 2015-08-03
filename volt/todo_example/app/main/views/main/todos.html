@@ -4,6 +4,14 @@
 <:Body>
     <h1>Todo List</h1>
 
+    <table class="todo-table">
+       {{ page._todos.each do |todo| }}
+         <tr>
+           <td>{{ todo._name }}</td>
+         </tr>
+       {{ end }}
+     </table>
+
     <form e-submit="add_todo" role="form">
       <div class="form-group">
         <label>Todo</label>

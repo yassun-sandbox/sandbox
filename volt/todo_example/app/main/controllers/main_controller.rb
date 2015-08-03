@@ -9,6 +9,11 @@ module Main
       # Add code for when the about view is loaded
     end
 
+    def add_todo
+      page._todos << { name: page._new_todo }
+      page._new_todo = ''
+    end
+
     private
 
     # The main template contains a #template binding that shows another
