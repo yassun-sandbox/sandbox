@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="js/external/underscore.js"></script>
+    <script src="js/external/jquery-1.11.3.js"></script>
+    <script src="js/external/backbone.js"></script>
+    <script src="js/external/backbone.marionette.js"></script>
+    <script>
+        MApp = new Backbone.Marionette.Application();
+        MApp.addRegions({
+            mainReginon:'#app',
+            onShow:function(view){
+                console.log("view is shown");
+            },
+            onClose:function(view){
+                console.log("view is closed");
+            }
+        });
+        var region = MApp.mainReginon;
+        console.log(region);
+    </script>
+  </head>
+  <body>
+      <div id="app"></div>
+  </body>
+</html>
