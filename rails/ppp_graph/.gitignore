@@ -1,0 +1,7 @@
+/log/*.log
+/tmp
+/vendor/bundle
+
+.DS_Store
+._*
+
