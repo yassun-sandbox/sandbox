@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="js/external/underscore.js"></script>
+    <script src="js/external/jquery-1.11.3.js"></script>
+    <script src="js/external/backbone.js"></script>
+    <script src="js/external/backbone-validation.js"></script>
+    <script>
+        var SomeModel = Backbone.Model.extend({
+          validation: {
+            name: {
+              required: true
+            },
+            'address.street': {
+              required: true
+            },
+            'address.zip': {
+              length: 4
+            },
+            age: {
+              range: [1, 80]
+            },
+            email: [{
+                  required: true,
+                  msg: 'Please enter an email address'
+                },{
+                  pattern: 'email',
+                  msg: 'Please enter a valid email'
+            }],
+            someAttribute: function(value) {
+              if(value !== 'somevalue') {
+                return 'Error message';
+              }
+            }
+          }
+        });
+
+        var someModel = new SomeModel();
+        if (!user.isValid()) {
+          console.log(user.validationError);
+        }
+ 
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
