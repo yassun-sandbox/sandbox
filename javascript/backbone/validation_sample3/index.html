@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="js/external/underscore.js"></script>
+    <script src="js/external/jquery-1.11.3.js"></script>
+    <script src="js/external/backbone.js"></script>
+    <script src="js/external/backbone-validator.js"></script>
+    <script>
+        var User = Backbone.Model.extend({
+          validation: {
+            name: {
+              blank: false,
+              message: 'Name is required'
+            },
+
+            email: {
+              required: true,
+              format: 'email',
+              message: 'Does not match format'
+            },
+            phone: [{
+              required: true,
+              format: 'number',
+              message: 'Does not match format'
+            }, {
+              maxLength: 15,
+              message: function(attrName, attrValue, attrExpectation, validatorName) {
+                return 'Passed ' + attrName +' is too long. It is expected to be shorter than ' + attrExpectation + ' chars';
+              }
+            }]
+          }
+        });
+
+        var user = new User();
+
+        if (!user.isValid()) {
+          console.log(user.validate());
+        }
+
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
