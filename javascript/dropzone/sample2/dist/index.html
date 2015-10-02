@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
+    <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
+</head>
+<body>
+    <form id="myform" action="#">
+      <input type="email" name="username" />
+      <input type="password" name="password" />
+<div id="myDropzone" class="dropzone">
+      <div class="dz-default dz-message"></div>
+</div>
+      <input type="password" name="password" />
+
+
+      <button type="submit">Submit data and files!</button>
+    </form>
+
+</body>
+</html>
+
+<script>
+    $(document).ready(function(){
+
+      var initMockFiles = [
+          { name: "init1.pdf", size: 12345 },
+          { name: "init2.pdf", size: 1234567890 }
+      ];
+
+      Dropzone.autoDiscover = false;
+      var myDropzone = new Dropzone("div#myDropzone", { 
+        url: "http://localhost:4567/dummy",
+        addRemoveLinks: true,
+        removedfile: function(file) {
+          $('input[name="tempfiles[]"][value="'+file.id+'"]').remove();
+          var _ref;
+          return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+        },
+        uploadMultiple: true,
+        parallelUploads: 100,
+        maxFiles: 100,
+        dictRemoveFile:'削除',
+        success: function (file, response) {
+            file.id = Math.random();
+            $('#myform').append('<input type="hidden" name="tempfiles[]" value="'+file.id+'" />');
+            file.previewElement.classList.add("dz-success");
+        },
+        error: function (file, response) {
+            // https://github.com/enyo/dropzone/issues/244
+            // var obj = jQuery.parseJSON(response);
+            // file.id = obj.id;
+           file.previewElement.classList.add("dz-error");
+        }
+      });
+
+      // http://stackoverflow.com/questions/17759286/how-can-i-show-you-the-files-already-stored-on-server-using-dropzone-js
+      for ( var i = 0, len = initMockFiles.length; i < len ; i++){
+          initMockFiles[i].id = Math.random();
+          $('#myform').append('<input type="hidden" name="tempfiles[]" value="'+initMockFiles[i].id+'" />');
+          myDropzone.options.addedfile.call(myDropzone, initMockFiles[i]);
+      }
+
+      // oops
+      $(".dropzone .dz-preview .dz-progress").hide();
+
+    });
+</script>
+
