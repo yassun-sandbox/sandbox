@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sample</title>
+</head>
+<body ng-app="myApp">
+    <div ng-controller="SampleCtrlA">
+        <dir-a my-arr="arr"><span ng-repeat="a in arr">{{a}},</span></dir-a>
+    </div>
+    <div ng-controller="SampleCtrlB">
+        <dir-b my-arr="arr"><span ng-repeat="a in arr">{{a}},</span></dir-b>
+    </div>
+    <div ng-controller="SampleCtrlC">
+        <dir-c my-arr="arr"><span ng-repeat="a in arr">{{a}},</span></dir-c>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular-route.js"></script>
+    <script>
+        angular.module('myApp', ['ngRoute']);
+
+        var link = function (scope, elem, attr) {
+            console.log(scope.arr);
+            scope.arr = [6, 7, 8, 9, 10];
+            console.log(scope.arr);
+            console.log(scope);
+        };
+
+        angular.module('myApp')
+        .directive('dirA', function () {
+            return {
+                restrict: 'E',
+                scope: {arr: '@myArr'},
+                link: link
+            };
+        })
+        .directive('dirB', function () {
+            return {
+                restrict: 'E',
+                scope: {arr: '=myArr'},
+                link: link
+            };
+        })
+        .directive('dirC', function () {
+            return {
+                restrict: 'E',
+                scope: {arr: '&myArr'},
+                link: link
+            };
+        });
+
+        function Ctrl($scope) {
+            $scope.arr = [1, 2, 3, 4, 5];
+        }
+
+        angular.module('myApp')
+        .controller('SampleCtrlA', ['$scope', Ctrl]);
+
+        angular.module('myApp')
+        .controller('SampleCtrlB', ['$scope', Ctrl]);
+
+        angular.module('myApp')
+        .controller('SampleCtrlC', ['$scope', Ctrl]);
+    </script>
+</body>
+</html>
