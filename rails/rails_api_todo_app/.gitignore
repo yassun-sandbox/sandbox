@@ -2,4 +2,5 @@
 Gemfile
 Gemfile.lock
 .bundle/
+vendor
 
