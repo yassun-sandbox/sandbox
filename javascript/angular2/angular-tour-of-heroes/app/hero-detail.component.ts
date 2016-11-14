@@ -18,6 +18,8 @@ import { HeroService } from './hero.service';
         <input [(ngModel)]="hero.name" placeholder="name"/>
       </div>
     </div>
+    <button (click)="goBack()">Back</button>
+
   `
 })
 export class HeroDetailComponent {
@@ -34,7 +36,8 @@ export class HeroDetailComponent {
         .then(hero => this.hero = hero);
     });
   }
-
-
+  goBack(): void {
+    this.location.back();
+  }
 }
 
