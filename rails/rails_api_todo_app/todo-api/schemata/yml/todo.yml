@@ -1,7 +1,7 @@
 ---
 "$schema": http://json-schema.org/draft-04/hyper-schema
-title: FIXME - Todo
-description: FIXME
+title: Todo
+description: Todo API
 stability: prototype
 strictProperties: true
 type:
@@ -9,15 +9,20 @@ type:
 definitions:
   id:
     description: unique identifier of todo
-    readOnly: true
-    format: uuid
-    type:
-    - string
-  name:
-    description: unique name of todo
+    example: 1
     readOnly: true
     type:
+    - integer
+  title:
+    description: title of todo
+    example: 'Going to buy milk'
+    type:
     - string
+  description:
+    description: description of todo
+    example: 'I will buy milk on the way home from work.'
+    type:
+    - text
   identity:
     anyOf:
     - "$ref": "/schemata/todo#/definitions/id"
