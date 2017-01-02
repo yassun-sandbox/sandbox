@@ -14,30 +14,11 @@ const counter = (state = 0, action) => {
 
 // store
 const store = createStore(counter)
-console.log(store.getState())
+// subscribe
+store.subscribe(() => {
+  document.body.innerText = store.getState()
+})
+document.addEventListener('click', () => {
+  store.dispatch({ type: 'INCREMENT' })
+})
 
-//dispatch
-store.dispatch({type: 'INCREMENT'})
-console.log(store.getState())
-
-//expect(
-//  counter(0, {type: 'INCREMENT'})
-//).toEqual(1)
-//
-//expect(
-//  counter(1, {type: 'INCREMENT'})
-//).toEqual(2)
-//
-//expect(
-//  counter(2, {type: 'DECREMENT'})
-//).toEqual(1)
-//
-//expect(
-//  counter(1, {type: 'UNKNOWN'})
-//).toEqual(1)
-//
-//expect(
-//  counter(undefined, {})
-//).toEqual(0)
-//
-//console.log('test passed!')
