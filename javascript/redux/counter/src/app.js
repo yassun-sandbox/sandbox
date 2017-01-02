@@ -1,4 +1,5 @@
 import expect from 'expect'
+import { createStore } from 'redux'
 
 const counter = (state = 0, action) => {
   switch(action.type) {
@@ -11,24 +12,28 @@ const counter = (state = 0, action) => {
   }
 }
 
-expect(
-  counter(0, {type: 'INCREMENT'})
-).toEqual(1)
+// store
+const store = createStore(counter)
 
-expect(
-  counter(1, {type: 'INCREMENT'})
-).toEqual(2)
 
-expect(
-  counter(2, {type: 'DECREMENT'})
-).toEqual(1)
-
-expect(
-  counter(1, {type: 'UNKNOWN'})
-).toEqual(1)
-
-expect(
-  counter(undefined, {})
-).toEqual(0)
-
-console.log('test passed!')
+//expect(
+//  counter(0, {type: 'INCREMENT'})
+//).toEqual(1)
+//
+//expect(
+//  counter(1, {type: 'INCREMENT'})
+//).toEqual(2)
+//
+//expect(
+//  counter(2, {type: 'DECREMENT'})
+//).toEqual(1)
+//
+//expect(
+//  counter(1, {type: 'UNKNOWN'})
+//).toEqual(1)
+//
+//expect(
+//  counter(undefined, {})
+//).toEqual(0)
+//
+//console.log('test passed!')
