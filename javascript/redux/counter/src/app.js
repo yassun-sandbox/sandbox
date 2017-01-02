@@ -14,7 +14,11 @@ const counter = (state = 0, action) => {
 
 // store
 const store = createStore(counter)
+console.log(store.getState())
 
+//dispatch
+store.dispatch({type: 'INCREMENT'})
+console.log(store.getState())
 
 //expect(
 //  counter(0, {type: 'INCREMENT'})
