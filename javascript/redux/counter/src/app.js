@@ -1,5 +1,7 @@
 import expect from 'expect'
 import { createStore } from 'redux'
+import React from 'react'
+import ReactDOM from 'react-dom'
 
 const counter = (state = 0, action) => {
   switch(action.type) {
@@ -12,12 +14,23 @@ const counter = (state = 0, action) => {
   }
 }
 
+const Counter = ({value}) => (
+  <h1>{value}</h1>
+)
+
 const store = createStore(counter)
+
 const render = () => {
-  document.body.innerText = store.getState()
+  ReactDOM.render(
+    <Counter value={store.getState()} />,
+    document.getElementById('root')
+  )
 }
+
 store.subscribe(render)
+
 render()
+
 document.addEventListener('click', () => {
   store.dispatch({ type: 'INCREMENT' })
 })
