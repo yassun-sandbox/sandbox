@@ -1,6 +1,7 @@
 import expect from 'expect'
 import deepFreeze from 'deep-freeze'
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
+
 import React from 'react'
 import ReactDOM from 'react-dom'
 
@@ -51,19 +52,6 @@ const visibilityFilter = (
       return state;
   }
 };
-
-const todoApp = (state = {}, action) => {
-  return {
-    todos: todos(
-      state.todos,
-      action
-    ),
-    visibilityFilter: visibilityFilter(
-      state.visibilityFilter,
-      action
-    )
-  }
-}
 
 const testAddTodo = () => {
   const stateBefore = [];
@@ -128,7 +116,13 @@ const testToggleTodo = () => {
   ).toEqual(stateAfter);
 };
 
+const todoApp = combineReducers({
+  todos,
+  visibilityFilter
+});
+
 const store = createStore(todoApp);
+
 
 console.log("initial state: ");
 console.log(store.getState());
