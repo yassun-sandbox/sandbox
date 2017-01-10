@@ -78,37 +78,47 @@ const getVisibleTodos = (
   }
 }
 
+class VisibleTodoList extends Component {
+  componentDidMount() {
+    this.unsubscribe = store.subscribe(() =>
+      this.forceUpdate()
+    );
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
+  render() {
+    const props = this.props;
+    const state = store.getState();
+
+    return (
+      <TodoList
+        todos={
+          getVisibleTodos(
+            state.todos,
+            state.visibilityFilter
+          )
+        }
+        onTodoClick={id =>
+          store.dispatch({
+            type: 'TOGGLE_TODO',
+            id
+          })
+        }
+      />
+    );
+  }
+}
+
 let nextTodoId = 0;
 class TodoApp extends Component {
   render() {
-    const {
-      todos,
-      visibilityFilter
-    } = this.props;
-
-    const visibleTodos = getVisibleTodos(
-      todos,
-      visibilityFilter
-    );
-
     return (
       <div>
-        <AddTodo
-          onAddClick={text =>
-            store.dispatch({
-              type: 'ADD_TODO',
-              id: nextTodoId++,
-              text
-            })
-          } />
-        <TodoList
-          todos={visibleTodos}
-          onTodoClick={id =>
-            store.dispatch ({
-              type: 'TOGGLE_TODO',
-              id
-            })
-          } />
+        <AddTodo />
+        <VisibleTodoList />
         <Footer />
       </div>
     );
@@ -149,9 +159,7 @@ const Todo = ({
 </li>
 );
 
-const AddTodo = ({
-    onAddClick
-}) => {
+const AddTodo = () => {
   let input;
 
   return (
@@ -160,10 +168,14 @@ const AddTodo = ({
         input = node;
       }} />
       <button onClick={() => {
-        onAddClick(input.value);
+        store.dispatch({
+          type: 'ADD_TODO',
+          id: nextTodoId++,
+          text: input.value
+        })
         input.value = '';
       }}>
-      Add Todo
+        Add Todo
       </button>
     </div>
   );
@@ -250,15 +262,8 @@ const Footer = () => (
 );
 
 
-const render = () => {
-    ReactDOM.render(
-      <TodoApp
-        {...store.getState()}
-      />,
-      document.getElementById('root')
-    );
-};
-
-store.subscribe(render);
-render();
+ReactDOM.render(
+  <TodoApp/>,
+  document.getElementById('root')
+);
 
