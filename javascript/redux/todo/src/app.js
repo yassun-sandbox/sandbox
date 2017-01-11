@@ -58,7 +58,6 @@ const todoApp = combineReducers({
   visibilityFilter
 });
 
-const store = createStore(todoApp);
 
 const getVisibleTodos = (
   todos,
@@ -80,6 +79,7 @@ const getVisibleTodos = (
 
 class VisibleTodoList extends Component {
   componentDidMount() {
+    const { store } = this.props;
     this.unsubscribe = store.subscribe(() =>
       this.forceUpdate()
     );
@@ -91,6 +91,7 @@ class VisibleTodoList extends Component {
 
   render() {
     const props = this.props;
+    const { store } = props;
     const state = store.getState();
 
     return (
@@ -113,17 +114,13 @@ class VisibleTodoList extends Component {
 }
 
 let nextTodoId = 0;
-class TodoApp extends Component {
-  render() {
-    return (
-      <div>
-        <AddTodo />
-        <VisibleTodoList />
-        <Footer />
-      </div>
-    );
-  }
-}
+const TodoApp = ({ store }) => (
+  <div>
+    <AddTodo store={store} />
+    <VisibleTodoList store={store} />
+    <Footer store={store} />
+  </div>
+);
 
 const TodoList = ({
   todos,
@@ -159,7 +156,7 @@ const Todo = ({
 </li>
 );
 
-const AddTodo = () => {
+const AddTodo = ({ store }) => {
   let input;
 
   return (
@@ -203,6 +200,7 @@ const Link = ({
 
 class FilterLink extends Component {
   componentDidMount() {
+    const { store } = this.props;
     this.unsubscribe = store.subscribe(() =>
       this.forceUpdate()
     );
@@ -214,6 +212,7 @@ class FilterLink extends Component {
 
   render() {
     const props = this.props;
+    const { store } = props;
     const state = store.getState();
     console.log(state);
 
@@ -236,24 +235,27 @@ class FilterLink extends Component {
   }
 };
 
-const Footer = () => (
+const Footer = ({ store }) => (
     <p>
       Show:
       {' '}
       <FilterLink
         filter='SHOW_ALL'
+        store={store}
       >
         ALL
       </FilterLink>
       {' '}
       <FilterLink
         filter='SHOW_ACTIVE'
+        store={store}
       >
         Active
       </FilterLink>
       {' '}
       <FilterLink
         filter='SHOW_COMPLETED'
+        store={store}
       >
         Completed
       </FilterLink>
@@ -261,9 +263,8 @@ const Footer = () => (
 
 );
 
-
 ReactDOM.render(
-  <TodoApp/>,
+  <TodoApp store = {createStore(todoApp)} />,
   document.getElementById('root')
 );
 
