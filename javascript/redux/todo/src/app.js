@@ -3,6 +3,7 @@ import deepFreeze from 'deep-freeze'
 import { createStore, combineReducers } from 'redux'
 
 import React, { Component } from 'react';
+import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom'
 
 const todo = (state, action) => {
@@ -268,21 +269,20 @@ const Footer = () => (
 
 );
 
-class Provider extends Component {
-  getChildContext() {
-    return {
-      store: this.props.store
-    };
-  }
-
-  render() {
-    return this.props.children
-  }
-}
-
-Provider.childContextTypes = {
-  store: React.PropTypes.object
-};
+//class Provider extends Component {
+//  getChildContext() {
+//    return {
+//      store: this.props.store
+//    };
+//  }
+//
+//  render() {
+//    return this.props.children
+//  }
+//}
+//Provider.childContextTypes = {
+//  store: React.PropTypes.object
+//};
 
 ReactDOM.render(
   <Provider store={createStore(todoApp)}>
