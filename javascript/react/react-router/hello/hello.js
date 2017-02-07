@@ -10,6 +10,7 @@ class App extends Component {
                     <li><Link to="/">index</Link></li>
                     <li><Link to="/a">page A</Link></li>
                     <li><Link to="/b">page B</Link></li>
+                    <li><Link to="/123">page 123</Link></li>
                 </ul>
                 <div>
                     { this.props.children }
@@ -37,12 +38,19 @@ class PageB extends Component {
     }
 }
 
+class PageParam extends Component {
+    render() {
+        return <div>{ this.props.params.id }</div>;
+    }
+}
+
 render((
     <Router history={hashHistory}>
         <Route path="/" component={App}>
             <IndexRoute component={Index} />
             <Route path="/a" component={PageA} />
             <Route path="/b" component={PageB} />
+            <Route path="/:id" component={PageParam} />
         </Route>
     </Router>
 ), document.querySelector('#app'));
