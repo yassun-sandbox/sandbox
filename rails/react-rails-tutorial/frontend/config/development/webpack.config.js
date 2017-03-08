@@ -2,6 +2,7 @@ module.exports = {
   devtool: 'inline-source-map',
   entry: {
     entry: './src/javascripts/entry.js',
+    comment_box: './src/javascripts/components/comment_box/',
   },
   output: {
     path: '../app/assets/javascripts/',

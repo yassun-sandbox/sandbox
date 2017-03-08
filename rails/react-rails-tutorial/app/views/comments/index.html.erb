@@ -1,2 +1,5 @@
-<%= react_component('CommentBox', url: '/api/v1/comments.json', pollInterval: 2000) %>
+<%= javascript_include_tag 'comment_box' %>
 <%= javascript_include_tag 'entry' %>
+<%= react_component('CommentBox', url: '/api/v1/comments.json', pollInterval: 2000) %>
+
+
