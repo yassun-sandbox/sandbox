@@ -21,7 +21,7 @@ class CommentBox extends React.Component {
 
     componentDidMount() {
       this.loadCommentsFromServer();
-      setInterval(this.loadCommentsFromServer, this.props.pollInterval);
+      //setInterval(this.loadCommentsFromServer, this.props.pollInterval);
     }
 
     render() {
@@ -38,9 +38,9 @@ window.CommentBox = CommentBox;
 
 class CommentList extends React.Component {
   render() {
-    var commentNodes = this.props.data.map(function (comment) {
+    var commentNodes = this.props.data.map(function (comment, i) {
       return (
-        <Comment author={comment.author}>
+        <Comment key={i} author={comment.author}>
           {comment.text}
         </Comment>
       );
