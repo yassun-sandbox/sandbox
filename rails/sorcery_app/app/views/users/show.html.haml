@@ -1,0 +1,8 @@
+%h2 User MyPage
+
+= "username: #{@user.username}"
+%br
+= "email: #{@user.email}"
+%br
+= link_to "log out", session_path, method: :DELETE
+

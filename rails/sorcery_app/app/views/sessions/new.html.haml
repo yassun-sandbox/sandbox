@@ -1,0 +1,25 @@
+%h2 User Login
+
+- if logged_in?
+  = current_user.username
+  = current_user.email
+
+= form_tag sessions_path do
+  .field
+    = label_tag :username
+    = text_field_tag :username, params[:username]
+  .field
+    = label_tag :email
+    = text_field_tag :email, params[:email]
+  .field
+    = label_tag :password
+    = password_field_tag :password
+  .field
+    = check_box_tag :remember_me, 1, params[:remember_me]
+    = label_tag :remember_me
+  .actions
+    = submit_tag "Log in"
+
+%p
+  or
+  = link_to "Signup", new_user_path
