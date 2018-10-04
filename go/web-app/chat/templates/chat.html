@@ -46,6 +46,7 @@
       var msg = eval("("+e.data+")");
       messages.append(
         $("<li>").append(
+          $("<span>").text(msg.When + ": "),
           $("<strong>").text(msg.Name + ": "),
           $("<span>").text(msg.Message)
         )
