@@ -66,10 +66,12 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 			log.Fatalln("ユーザーの取得に失敗しました", provider, "- ", err)
 		}
 
+		// Base64に
 		authCookieValue := objx.New(map[string]interface{}{
 			"name": user.Name(),
 		}).MustBase64()
 
+		// クッキーに追加
 		http.SetCookie(w, &http.Cookie{
 			Name:  "auth",
 			Value: authCookieValue,
