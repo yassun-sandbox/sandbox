@@ -2,7 +2,8 @@ package main
 
 import (
 	"errors"
-	"log"
+	"io/ioutil"
+	"path/filepath"
 )
 
 // ErrNoAvatarはAvatarインスタンスがアバターのURLを返すことができない
@@ -51,10 +52,20 @@ type FileSystemAvatar struct{}
 var UseFileSystemAvatar FileSystemAvatar
 
 func (_ FileSystemAvatar) GetAvatarURL(c *client) (string, error) {
-	log.Println("----- Call GetAvatarURL----")
+
 	if userid, ok := c.userData["userid"]; ok {
 		if useridStr, ok := userid.(string); ok {
-			return "/avatars/" + useridStr + ".jpg", nil
+			if files, err := ioutil.ReadDir("avatars"); err == nil {
+				for _, file := range files {
+					if file.IsDir() {
+						continue
+					}
+					if match, _ := filepath.Match(useridStr+"*", file.Name()); match {
+						return "/avatars/" + file.Name(), nil
+					}
+				}
+			}
+
 		}
 	}
 	return "", ErrNoAvatarURL
