@@ -66,13 +66,14 @@ func main() {
 		google.New(os.Getenv("CLIENT_ID"), os.Getenv("SECRET_KEY"), "http://localhost:8080/auth/callback/google"),
 	)
 
-	r := newRoom(UseGravatar)
+	r := newRoom(UseFileSystemAvatar)
 	r.tracer = trace.New(os.Stdout)
 	http.Handle("/chat", MustAuth(&templateHandler{filename: "chat.html"}))
 	http.Handle("/login", &templateHandler{filename: "login.html"})
 	// 状態を持たない場合は関数を使うでもよい
 	http.HandleFunc("/auth/", loginHandler)
 	http.Handle("/room", r)
+	http.HandleFunc("/uploader", uploaderHandler)
 
 	http.HandleFunc("/logout", func(w http.ResponseWriter, r *http.Request) {
 		http.SetCookie(w, &http.Cookie{
@@ -84,6 +85,14 @@ func main() {
 		w.Header()["Location"] = []string{"/chat"}
 		w.WriteHeader(http.StatusTemporaryRedirect)
 	})
+
+	http.Handle("/upload", &templateHandler{filename: "upload.html"})
+
+	http.Handle("/avatars/",
+		// avatarsを削ってhttp.Handlerを渡す
+		http.StripPrefix("/avatars/",
+			// 指定したディレクトリをファイルサーバとして公開する。
+			http.FileServer(http.Dir("./avatars"))))
 
 	// チャットルームを開始します
 	go r.run()

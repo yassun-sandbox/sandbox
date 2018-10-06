@@ -18,6 +18,7 @@ type client struct {
 	userData map[string]interface{}
 }
 
+// ソケットにメッセージが格納された場合の処理
 func (c *client) read() {
 	for {
 		var msg *message
