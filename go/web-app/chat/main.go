@@ -19,6 +19,12 @@ import (
 	"./trace"
 )
 
+// 現在アクティブなAvatarの実装をチェインレスポンスビリティで探す
+var avatars Avatar = TryAvatars{
+	UseFileSystemAvatar,
+	UseAuthAvatar,
+	UseGravatar}
+
 func Env_load() {
 	err := godotenv.Load()
 	if err != nil {
