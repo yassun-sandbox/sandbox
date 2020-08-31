@@ -9,7 +9,7 @@ func main() {
 func getGraphicChar(c string) {
 	nihongoRune := []rune(c)
 	//	hex := hex.EncodeToString([]byte(c))
-	hex := fmt.Sprintf("%x", nihongoRune[0])
+	hex := fmt.Sprintf("0x%x", nihongoRune[0])
 	fmt.Println(hex)
 
 }
