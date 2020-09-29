@@ -1,22 +1,23 @@
-resource "aws_security_group" "example" {
-    name = "example"
-    vpc_id = aws_vpc.example.id
+module "http_sg" {
+  source      = "./security_group"
+  name        = "http-sg"
+  vpc_id      = aws_vpc.example.id
+  port        = 80
+  cidr_blocks = ["0.0.0.0/0"]
 }
 
-resource "aws_security_group_rule" "ingress_example" {
-  type              = "ingress" # inbound
-  from_port         = "80"
-  to_port           = "80"
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.example.id
+module "https_sg" {
+  source      = "./security_group"
+  name        = "https-sg"
+  vpc_id      = aws_vpc.example.id
+  port        = 443
+  cidr_blocks = ["0.0.0.0/0"]
 }
 
-resource "aws_security_group_rule" "egress_example" {
-  type              = "egress" # outbound
-  from_port         = 0
-  to_port           = 0
-  protocol          = "-1"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.example.id
+module "http_redirect_sg" {
+  source      = "./security_group"
+  name        = "http-redirect-sg"
+  vpc_id      = aws_vpc.example.id
+  port        = 8080
+  cidr_blocks = ["0.0.0.0/0"]
 }
