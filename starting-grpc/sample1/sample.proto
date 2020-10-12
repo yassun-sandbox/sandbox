@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package myapp;
+
+service AddressBookService {
+    rpc Search (SearchRequest) returns (SearchResponse);
+}
+
+message SearchRequest {
+    string name = 1;
+}
+
+message SearchResponse {
+    Person person = 1;
+}
+
+message Person {
+
+}
