@@ -1,6 +1,8 @@
 use clap::Clap;
+use std::fs::File;
+use std::io::{BufRead, BufReader};
 
-// あトリビュート
+// アトリビュート
 #[derive(Clap, Debug)]
 #[clap(
     name = "My RPN program",
@@ -19,9 +21,20 @@ struct Opts {
 fn main() {
     let opts = Opts::parse();
 
-    match opts.formula_file {
-        Some(file) => println!("File specified: {}", file),
-        None => println!("No file specified."),
+    // ファイルの読込み
+    if let Some(path) = opts.formula_file{
+        let f = File::open(path).unwrap();
+        let reader = BufReader::new(f);
+        run(reader, opts.verbose);
+    } else {
+        println!("no file is specified");
     }
-    println!("Is verbosity specified?: {}", opts.verbose);
+}
+
+fn run(reader: BufReader<File>, verbose: bool){
+    for line in reader.lines(){
+        let line = line.unwrap();
+        println!("{}", line);
+    }
+
 }
