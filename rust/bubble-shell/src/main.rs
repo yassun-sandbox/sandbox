@@ -29,13 +29,17 @@ fn main(){
                     eprintln!("{}", e);
                 }
             },
+            "exit" => return,
             command => {
-                let mut child = Command::new(command)
+                let child = Command::new(command)
                     .args(args)
-                    .spawn()
-                    .unwrap();
+                    .spawn();
 
-                child.wait().unwrap();
+                // gracefully handle malformed user input
+                match child {
+                    Ok(mut child) => { child.wait().unwrap(); },
+                    Err(e) => eprintln!("{}", e),
+                };
             }
         }
     }
