@@ -1,5 +1,7 @@
+use std::env;
 use std::io::{stdin, stdout, Write};
 use std::process::{Command};
+use std::path::Path;
 
 fn main(){
     loop {
@@ -17,12 +19,24 @@ fn main(){
         let command = parts.next().unwrap();
         let args = parts;
 
-        let mut child = Command::new(command)
-            .args(args)
-            .spawn()
-            .unwrap();
+        match command {
+            "cd" => {
+                // default to '/' as new directory if one was not provided
+                let new_dir = args.peekable().peek().map_or("/", |x| *x);
+                let root = Path::new(new_dir);
+                // ディレクトリの移動
+                if let Err(e) = env::set_current_dir(&root) {
+                    eprintln!("{}", e);
+                }
+            },
+            command => {
+                let mut child = Command::new(command)
+                    .args(args)
+                    .spawn()
+                    .unwrap();
 
-        // don't accept another command until this one completes
-        child.wait().unwrap();
+                child.wait().unwrap();
+            }
+        }
     }
 }
