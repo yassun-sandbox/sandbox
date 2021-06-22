@@ -42,5 +42,33 @@ pub fn add_task(journal_path: PathBuf, task: Task) -> Result<()> {
     Ok(())
 }
 
-//pub fn complete_task(journal_path: PathBuf, task_position: usize) -> Result<()> { ... }
+pub fn complete_task(journal_path: PathBuf, task_position: usize) -> Result<()> {
+    // Open the file.
+    let file = OpenOptions::new()
+        .read(true)
+        .write(true)
+        .open(journal_path)?;
+
+    // Consume the file's contents as a vector of tasks.
+    let tasks = match serde_json::from_reader(file) {
+        Ok(tasks) => tasks,
+        Err(e) if e.is_eof() => Vec::new(),
+        Err(e) => Err(e)?,
+    };
+
+    // Remove the task.
+    if task_position == 0 || task_position > tasks.len() {
+        return Err(Error::new(ErrorKind::InvalidInput, "Invalid Task ID"));
+    }
+    tasks.remove(task_position - 1);
+
+    // Rewind and truncate the file.
+    file.seek(SeekFrom::Start(0))?;
+    file.set_len(0)?;
+
+    // Write the modified task list back into the file.
+    serde_json::to_writer(file, &tasks)?;
+    Ok(())
+}
+
 //pub fn list_tasks(journal_path: PathBuf) -> Result<()> { ... }
