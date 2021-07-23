@@ -1,10 +1,10 @@
-import React, { useState } from "react";
 import "./App.css";
 import { BookToRead } from "./BookToRead";
 import BookRow from "./BookRow";
 import Modal from "react-modal";
 import BookSearchDialog from "./BookSearchDialog";
 import {BookDescription} from "./BookDescription";
+import React, { useState, useEffect } from "react";
 
 // モーダル表示時にオーバーレイで覆うDOM領域
 Modal.setAppElement("#root");
@@ -24,12 +24,27 @@ const customStyles = {
   }
 };
 
+const APP_KEY = "react-hooks-tutorial"
+
 const App = () => {
   // 初回レンダリング時にデータを取得
   const [books, setBooks] = useState([] as BookToRead[]);
 
   // モーダルが開いているかどうか。
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  // 初回レンダリング時だけ実施
+  useEffect(() => {
+    const storedBooks = localStorage.getItem(APP_KEY);
+    if (storedBooks) {
+      setBooks(JSON.parse(storedBooks));
+    }
+  }, []);
+
+  // booksが更新されたらローカルストレージに登録する
+  useEffect(() => {
+    localStorage.setItem(APP_KEY, JSON.stringify(books));
+  }, [books]);
 
   // Delete
   const handleBookDelete = (id: number) => {
