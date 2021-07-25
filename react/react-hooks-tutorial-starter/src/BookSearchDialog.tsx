@@ -1,6 +1,7 @@
-import { BookDescription } from "./BookDescription";
+import React, { useState, useRef } from "react";
+import { BookDescription } from './BookDescription'
 import BookSearchItem from "./BookSearchItem";
-import React, { useState, useEffect, useRef } from "react";
+import { useBookData } from "./useBookData";
 
 // 検索
 function buildSearchUrl(title: string, author: string, maxResults: number): string {
@@ -34,41 +35,20 @@ type BookSearchDialogProps = {
 };
 
 const BookSearchDialog = (props: BookSearchDialogProps) => {
-  const [books, setBooks] = useState([] as BookDescription[]);
   const titleRef = useRef<HTMLInputElement>(null);
   const authorRef = useRef<HTMLInputElement>(null);
-  const [isSearching, setIsSearching] = useState(false);
-
-  useEffect(() => {
-    if (isSearching) {
-      const url = buildSearchUrl(titleRef.current!.value, authorRef.current!.value, props.maxResults);
-      fetch(url)
-        .then((res) => {
-          return res.json();
-        })
-        .then((json) => {
-          return extractBooks(json);
-        })
-        .then((books) => {
-          setBooks(books);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
-    setIsSearching(false);
-      // 副作用が依存するステート変数
-      // 以下の変更を検知する都度処理を実行する。
-  }, [isSearching]);
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const books = useBookData(title, author, props.maxResults);
 
   // 検索の実施イベント
   const handleSearchClick = () => {
-    // useref経由で値を取得
     if (!titleRef.current!.value && !authorRef.current!.value) {
       alert("条件を入力してください");
       return;
     }
-    setIsSearching(true);
+    setTitle(titleRef.current!.value);
+    setAuthor(authorRef.current!.value);
   };
 
   // 書籍の追加
