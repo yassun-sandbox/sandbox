@@ -24,12 +24,32 @@ impl<T: Default> ToyVec<T> {
             .into_boxed_slice()
     }
 
+    // 格納数
     pub fn len(&self) -> usize {
         self.len
     }
 
     pub fn capacity(&self) -> usize {
         self.elements.len()
+    }
+
+    // elementはmove
+    pub fn push(&mut self, element: T) {
+        // 足りなくなったら増やす
+        if self.len == self.capacity() {
+            self.grow();
+        }
+        self.elements[self.len] = element;
+        self.len += 1;
+    }
+
+    // usizeはcopy
+    pub fn get(&self, index: usize) -> Option<&T> {
+        if index < self.len {
+            Some(&self.elements[index])
+        } else {
+            None
+        }
     }
 }
 
