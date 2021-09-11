@@ -51,5 +51,13 @@ impl<T: Default> ToyVec<T> {
             None
         }
     }
+
+    // 戻り値が参照型のとき、以下のルールでライフタイムを決める
+    // - 参照方の引数が1だけある場合はそれと同じライフタイムになる
+    // - 第一引数がselfの場合はそれと同じライフタイムになる。
+    // - その他の場合は明示的にライフタイムを指定しなければならない。
+    pub fn get_or<'a>(&'a self, index: usize, default: &'a T) -> &'a T {
+        self.get(index).unwrap_or(default)
+    }
 }
 
