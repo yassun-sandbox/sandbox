@@ -24,5 +24,12 @@ impl<T: Default> ToyVec<T> {
             .into_boxed_slice()
     }
 
+    pub fn len(&self) -> usize {
+        self.len
+    }
+
+    pub fn capacity(&self) -> usize {
+        self.elements.len()
+    }
 }
 
