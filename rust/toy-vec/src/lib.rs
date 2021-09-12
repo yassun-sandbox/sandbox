@@ -77,8 +77,11 @@ impl<T: Default> ToyVec<T> {
         } else {
             let new_elements = Self::allocate_in_heap(self.capacity() * 2);
             // https://qiita.com/quasardtm/items/b54a48c1accd675e0bf1
-            //
             let old_elements = std::mem::replace(&mut self.elements, new_elements);
+            // 以下ケースはエラーになる。
+            // let old_element = self.element ・・・self.elementの所有権をold_elementに移動/self.elementは未初期化状態になる
+            // ※この場合はself.elementの所有権を移動しようとしているのでNG(所持しているのはselfの所有権でelement(Box[T])の所有権は持っていない。)
+            // self.elements = Self::allocate_in_heap(self.capacity() * 2); ・・・未初期化扱いの変数は利用できないルールに該当するためエラー
             for (i, elem) in old_elements.into_vec().into_iter().enumerate() {
                 self.elements[i] = elem;
             }
