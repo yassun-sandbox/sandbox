@@ -59,5 +59,16 @@ impl<T: Default> ToyVec<T> {
     pub fn get_or<'a>(&'a self, index: usize, default: &'a T) -> &'a T {
         self.get(index).unwrap_or(default)
     }
+
+    pub fn pop(&mut self) -> Option<T> {
+        if self.len == 0 {
+            None
+        } else {
+            self.len -= 1;
+            // selfの所有しているものの所有権を渡せないので入れ替える
+            let elem = std::mem::replace(&mut self.elements[self.len], Default::default());
+            Some(elem)
+        }
+    }
 }
 
