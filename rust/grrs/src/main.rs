@@ -1,4 +1,5 @@
 use structopt::StructOpt;
+use anyhow::{Context, Result};
 
 #[derive(StructOpt)]
 struct Cli {
@@ -7,12 +8,17 @@ struct Cli {
     path: std::path::PathBuf,
 }
 
-fn main() {
+fn main() -> Result<()> {
     let args = Cli::from_args();
-    let content = std::fs::read_to_string(&args.path).expect("could not read file");
+
+    let path = &args.path;
+    let content = std::fs::read_to_string(path).with_context(|| format!("could not read file `{:?}`", path))?;
+
     for line in content.lines() {
         if line.contains(&args.pattern) {
             println!("{}", line);
         }
     }
+
+    Ok(())
 }
