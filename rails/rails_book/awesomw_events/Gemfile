@@ -17,7 +17,7 @@ gem 'kaminari', '~> 0.15.1'
 gem 'kaminari-bootstrap', '~> 3.0.1'
 gem "ransack", '~> 1.2.2'
 gem 'carrierwave', '~> 0.10.0'
-gem 'nokogiri', '1.6.1'
+gem 'nokogiri', '1.13.9'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
